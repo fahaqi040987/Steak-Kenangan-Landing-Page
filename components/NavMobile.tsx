@@ -1,17 +1,18 @@
 "use client";
 
 /**
- * NavMobile – Hamburger menu for small screens. Toggle opens a full-screen overlay with logo, scroll links (with icons), and CTA.
- * Links from data/navMobileLinks.tsx. Closing overlay on link click for better UX.
+ * NavMobile – Hamburger menu for small screens. Toggle opens a full-screen overlay with logo,
+ * scroll links (with icons) from the section registry, and a reservation CTA.
+ * Closing overlay on link click for better UX.
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { RiMenu2Line } from "react-icons/ri";
 import { IoCloseOutline } from "react-icons/io5";
-import { Link as ScrollLink } from "react-scroll";
+import { site } from "@/content/site";
+import { getSection, sections } from "@/data/sections";
 import { Button } from "./ui/button";
-import { navMobileLinks } from "@/data/navMobileLinks";
+import ScrollLink from "./ui/scroll-link";
 
 export interface NavMobileProps {
   containerStyles?: string;
@@ -25,50 +26,96 @@ export default function NavMobile({
   linkStyles = "",
 }: NavMobileProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const reservation = getSection("reservation");
+
+  /** Escape closes the menu; body scroll is locked while the overlay is open. */
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <div className={containerStyles}>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer outline-none border-0 bg-transparent p-0"
-        aria-label="Toggle menu"
+        className="cursor-pointer border-0 bg-transparent p-0"
+        aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+        aria-expanded={isOpen}
       >
-        <RiMenu2Line className="text-3xl text-white transition-all duration-200" />
+        <RiMenu2Line className="text-3xl text-white transition-transform duration-200" />
       </button>
-      {/* Overlay: slides in from right when isOpen. Fixed full viewport. */}
+      {/* Overlay: slides in from right when isOpen. invisible when closed = out of the
+          tab order and the a11y tree (unlike merely being off-screen). */}
       <aside
-        className={`${isOpen ? "right-0" : "-right-full"} bg-black fixed z-20 w-full p-10 top-0 bottom-0 transition-all duration-500`}
+        className={`${
+          isOpen ? "right-0 visible" : "-right-full invisible"
+        } bg-charcoal fixed z-20 w-full p-10 top-0 bottom-0 transition-[right,visibility] duration-500`}
+        aria-hidden={!isOpen}
       >
         <div className="flex flex-col items-center justify-between h-full">
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="cursor-pointer text-4xl text-white absolute w-10 h-10 left-8 bg-green flex items-center justify-center border-0"
-            aria-label="Close menu"
+            className="cursor-pointer text-4xl text-charcoal absolute w-10 h-10 left-8 bg-gold rounded-full flex items-center justify-center border-0"
+            aria-label="Tutup menu"
+            tabIndex={isOpen ? 0 : -1}
           >
             <IoCloseOutline />
           </button>
-          <Link href="/">
-            <Image src="/logo.svg" width={90} height={36} alt="W'Food" />
-          </Link>
+          <ScrollLink
+            to="home"
+            smooth
+            href="#home"
+            onClick={() => setIsOpen(false)}
+            tabIndex={isOpen ? 0 : -1}
+          >
+            <Image
+              src={site.brand.logoWhite}
+              width={160}
+              height={50}
+              alt={site.brand.name}
+              className="h-10 w-auto"
+            />
+          </ScrollLink>
           <div className="flex flex-col gap-y-8">
-            {navMobileLinks.map((link) => (
-              <ScrollLink
-                key={link.path}
-                to={link.path}
-                offset={link.offset}
-                smooth={false}
-                className="flex items-center gap-x-3 cursor-pointer"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className={iconStyles}>{link.icon}</div>
-                <div className={linkStyles}>{link.name}</div>
-              </ScrollLink>
-            ))}
+            {sections
+              .filter((section) => section.inNav)
+              .map((section) => (
+                <ScrollLink
+                  key={section.id}
+                  to={section.id}
+                  href={`#${section.id}`}
+                  offset={section.offset}
+                  smooth={false}
+                  className="flex items-center gap-x-3 cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                  tabIndex={isOpen ? 0 : -1}
+                >
+                  <div className={iconStyles} aria-hidden="true">
+                    {section.icon}
+                  </div>
+                  <div className={linkStyles}>{section.label}</div>
+                </ScrollLink>
+              ))}
           </div>
-          <ScrollLink to="reservation" smooth offset={-150}>
-            <Button variant="orange">Book a table</Button>
+          <ScrollLink
+            to={reservation.id}
+            smooth
+            href={`#${reservation.id}`}
+            offset={reservation.offset}
+            onClick={() => setIsOpen(false)}
+            tabIndex={isOpen ? 0 : -1}
+          >
+            <Button variant="gold">{reservation.label}</Button>
           </ScrollLink>
         </div>
       </aside>

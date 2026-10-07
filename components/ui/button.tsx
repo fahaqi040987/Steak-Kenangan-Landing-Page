@@ -1,7 +1,8 @@
 "use client";
 
 /**
- * Button – Reusable button with CVA variants (default, green, orange, input, ghost) and sizes (default, sm).
+ * Button – Reusable button with CVA variants (default/gold, outline, input, ghost) and sizes (default, sm).
+ * Brand style mirrors the reference site's .btn-gold: gold surface, charcoal text, lighter on hover.
  * asChild: when true, renders as Radix Slot so the single child receives the button styles (e.g. for ScrollLink).
  */
 import * as React from "react";
@@ -9,21 +10,24 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-/** CVA: base classes + variant/size options; used by Button and by Calendar for nav/day styles */
+/** CVA: base classes + variant/size options; used by Button and by Calendar for nav/day styles.
+ *  Pill shape + uppercase tracking = the modern-bistro CTA style. Widths are content-driven
+ *  (min-w, not fixed w) so longer labels never overflow. Hover lifts via transform only. */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap text-base font-semibold ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange focus-visible:ring-offset-1 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap text-sm font-semibold uppercase tracking-[0.08em] rounded-full transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "text-white bg-green hover:bg-green-hover",
-        green: "text-white bg-green hover:bg-green-hover",
-        orange: "text-white bg-orange hover:bg-orange-hover",
-        input: "bg-white/5 border border-white/10 text-white",
+        default: "text-charcoal bg-gold hover:bg-gold-hover hover:shadow-primary",
+        gold: "text-charcoal bg-gold hover:bg-gold-hover hover:shadow-primary",
+        outline: "text-charcoal border border-gold hover:bg-gold/10",
+        input:
+          "bg-white/5 border border-white/10 text-white hover:bg-white/10 focus-visible:ring-gold focus-visible:ring-offset-transparent",
         ghost: "hover:bg-black/5",
       },
       size: {
-        default: "w-[170px] h-[62px] px-6",
-        sm: "w-[150px] h-[58px] px-6",
+        default: "min-w-[170px] h-[56px] px-8",
+        sm: "min-w-[140px] h-[46px] px-6",
       },
     },
     defaultVariants: {

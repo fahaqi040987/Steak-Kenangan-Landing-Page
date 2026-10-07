@@ -3,24 +3,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles: applied globally. Colors/fonts reference tailwind.config.js theme (e.g. bg-body, font-lora). */
+/* Base styles: applied globally. Colors/fonts reference tailwind.config.js theme (bg-cream, font-serif, ...). */
 @layer base {
   * {
     @apply box-border;
   }
-  /* html/body background avoids white flash before React hydrates */
+
+  /* Smooth anchor scrolling; scroll-margin keeps the fixed header from covering section tops.
+     Reduced-motion users get instant jumps instead. */
   html {
-    @apply bg-body;
+    @apply bg-cream;
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  /* Mobile polish: kill double-tap zoom delay on controls, neutral tap highlight */
+  a,
+  button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Brand selection + balanced headings (no orphan words on wraps) */
+  ::selection {
+    @apply bg-gold text-charcoal;
   }
   body {
-    @apply font-poppins bg-body text-black tracking-[0.5px];
+    @apply font-sans bg-cream text-charcoal tracking-[0.4px];
   }
-  /* Headings use Lora; sizes tuned for hero/section titles */
   h1,
   h2,
   h3 {
-    @apply font-lora font-bold;
+    @apply font-serif font-bold;
+    text-wrap: balance;
   }
+
+  /* Keyboard focus ring — #8C6D2F is `gold.deep` from the token seam (sanctioned literal:
+     the CSS LSP can't resolve theme(); the seam stays the source of truth for this value). */
+  a:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid #8c6d2f;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Headings use the brand serif (Playfair Display); sizes tuned for hero/section titles */
   h1 {
     @apply text-[62px] leading-[84px];
   }
@@ -31,15 +65,30 @@
     @apply text-[20px] leading-[30px];
   }
   p {
-    @apply text-black/80 leading-8;
+    @apply text-charcoal/80 leading-8;
   }
+  /* Links inherit their surface color (footer/hero are dark, sections are cream); hover shows gold.
+     transition-colors only — never transition:all (guidelines). */
   a {
-    @apply text-white hover:text-orange transition-all duration-300 cursor-pointer;
+    color: inherit;
+    @apply transition-colors duration-300 cursor-pointer;
+  }
+  a:hover {
+    @apply text-gold-deep;
+  }
+  /* Dark surfaces keep the brighter gold on hover (deep gold is for light backgrounds) */
+  .bg-charcoal a:hover,
+  .bg-charcoal-soft a:hover {
+    @apply text-gold;
   }
   label {
     @apply text-white text-sm uppercase font-normal block mb-2;
   }
   .active {
-    @apply text-orange;
+    @apply text-gold-deep;
+  }
+  .bg-charcoal .active,
+  .bg-charcoal-soft .active {
+    @apply text-gold;
   }
 }

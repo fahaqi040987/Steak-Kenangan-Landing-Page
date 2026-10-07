@@ -1,53 +1,53 @@
 /**
  * Root Layout – Wraps every page with fonts, metadata, and global styles.
  * Next.js App Router: layout.tsx is the root shell; children are the current route's page.
+ * Copy/metadata sourced from content/site values; fonts and colors are candidate-4 scope.
  */
 import type { Metadata } from "next";
-import { Lora, Poppins } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import MotionProvider from "@/components/MotionProvider";
 
-/** Google Fonts via next/font: Lora (serif) for headings. Subsets/weights reduce bundle size. */
-const lora = Lora({
+/** Playfair Display (serif) for headings — the brand's display face from the reference site. */
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-lora",
+  weight: ["500", "600", "700", "800"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
 });
 
-/** Poppins (sans-serif) for body text. Variable exposes --font-poppins for Tailwind. */
-const poppins = Poppins({
+/** Inter (sans-serif) for body text. Variable exposes --font-inter for Tailwind. */
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 });
 
 /**
- * SEO & social metadata. Used for <head> (title, description, og:, twitter:).
+ * SEO & social metadata for Steak Kenangan.
  * metadataBase: base URL for resolving relative image paths in Open Graph.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://restaurant-wfood.vercel.app"),
+  metadataBase: new URL("https://steakkenangan.com"),
   title: {
-    default: "W'Food - A Taste of Local Flavours | Modern Restaurant Website",
-    template: "%s | W'Food Restaurant",
+    default:
+      "Steak Kenangan — Rasa Yang Bercerita | Premium Steakhouse Sejak 2021",
+    template: "%s | Steak Kenangan",
   },
   description:
-    "Experience authentic local flavours at W'Food restaurant. Discover our favorite menu featuring Stilton and pancetta penne, Chorizo and avocado spaghetti, and more. Book a table online and enjoy modern dining with us.",
+    "Steak Kenangan adalah premium steakhouse yang berawal dari dapur sederhana di Belitung pada 2021. Lebih dari 100 item menu — Iga Bakar, Chicken Steak Crispy Black Paper, hingga pasta dan minuman signature. Hadir di Belitung, Depok Tanah Baru, Cibitung Bekasi, dan Jogjakarta. Bersertifikat Halal Indonesia. Reservasi tersedia, buka setiap hari 10.00–22.00 WIB.",
   keywords: [
-    "restaurant",
-    "local food",
-    "dining",
-    "W'Food",
-    "restaurant website",
-    "food menu",
-    "book table",
-    "restaurant reservation",
-    "local flavours",
-    "modern restaurant",
-    "fine dining",
-    "gourmet food",
-    "restaurant menu",
-    "online reservation",
-    "restaurant booking",
+    "steak kenangan",
+    "steakhouse",
+    "steak depok",
+    "iga bakar",
+    "restoran halal",
+    "steak rumahan",
+    "resto belitung",
+    "reservasi meja",
+    "steak cibitung",
+    "steak jogja",
+    "menu steak",
     "Next.js",
     "React",
     "TailwindCSS",
@@ -60,16 +60,17 @@ export const metadata: Metadata = {
     },
   ],
   other: {
-    "application-name": "W'Food Restaurant",
-    "apple-mobile-web-app-title": "W'Food",
+    "application-name": "Steak Kenangan",
+    "apple-mobile-web-app-title": "Steak Kenangan",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
-    "theme-color": "#e5e5e5",
-    "contact": "contact@arnobmahmud.com",
+    // Literal hex required by the theme-color spec — the one sanctioned copy;
+    // mirrors `cream` in tailwind.config.js, the token seam.
+    "theme-color": "#F7F1E6",
   },
   creator: "Arnob Mahmud",
-  publisher: "Arnob Mahmud",
+  publisher: "Steak Kenangan",
   robots: {
     index: true,
     follow: true,
@@ -83,34 +84,29 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://restaurant-wfood.vercel.app",
-    siteName: "W'Food Restaurant",
-    title: "W'Food - A Taste of Local Flavours | Modern Restaurant Website",
+    locale: "id_ID",
+    url: "https://steakkenangan.com",
+    siteName: "Steak Kenangan",
+    title: "Steak Kenangan — Rasa Yang Bercerita",
     description:
-      "Experience authentic local flavours at W'Food restaurant. Discover our favorite menu and book a table online.",
+      "Premium steakhouse sejak 2021. Belitung • Depok Tanah Baru • Cibitung Bekasi • Jogjakarta. Bersertifikat Halal Indonesia.",
     images: [
       {
-        url: "/hero/plate.png",
-        width: 756,
-        height: 682,
-        alt: "W'Food Restaurant - A Taste of Local Flavours",
+        url: "/hero/banner.jpg",
+        alt: "Suasana Steak Kenangan",
       },
       {
-        url: "/logo.svg",
-        width: 90,
-        height: 36,
-        alt: "W'Food Restaurant Logo",
+        url: "/brand/logo-white.png",
+        alt: "Logo Steak Kenangan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "W'Food - A Taste of Local Flavours | Modern Restaurant Website",
+    title: "Steak Kenangan — Rasa Yang Bercerita",
     description:
-      "Experience authentic local flavours at W'Food restaurant. Discover our favorite menu and book a table online.",
-    images: ["/hero/plate.png"],
-    creator: "@arnob_mahmud",
+      "Premium steakhouse sejak 2021. Belitung • Depok • Bekasi • Jogja.",
+    images: ["/hero/banner.jpg"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -120,13 +116,26 @@ export const metadata: Metadata = {
   category: "restaurant",
 };
 
-/** Root layout: html/body get font CSS vars and background so first paint avoids white flash. */
+/**
+ * Root layout: html lang matches the content locale (Indonesian); font CSS vars
+ * come from next/font. Backgrounds are NOT set inline — globals.css @layer base
+ * applies bg-cream to html/body, so the tailwind token seam stays the single edit point.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" style={{ backgroundColor: "#e5e5e5" }}>
-      <body className={`${lora.variable} ${poppins.variable}`} style={{ backgroundColor: "#e5e5e5" }}>{children}</body>
+    <html lang="id">
+      <body className={`${playfair.variable} ${inter.variable}`}>
+        {/* Skip link: first tab stop, jumps past the fixed header into the page */}
+        <a
+          href="#home"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-charcoal focus:text-gold focus:px-4 focus:py-2 focus:rounded-full"
+        >
+          Langsung ke konten
+        </a>
+        <MotionProvider>{children}</MotionProvider>
+      </body>
     </html>
   );
 }

@@ -1,11 +1,11 @@
 "use client";
 
 /**
- * Nav – Desktop navigation: react-scroll Links that smooth-scroll to section IDs (home, menu, about, contact).
- * Props allow parent to pass container and link class names (e.g. from Header).
+ * Nav – Desktop navigation: react-scroll Links driven by the section registry
+ * (data/sections). Only sections flagged inNav render here.
  */
-import { Link } from "react-scroll";
-import { navLinks } from "@/data/navLinks";
+import ScrollLink from "./ui/scroll-link";
+import { sections } from "@/data/sections";
 
 export interface NavProps {
   containerStyles?: string;
@@ -15,19 +15,22 @@ export interface NavProps {
 export default function Nav({ containerStyles = "", linkStyles = "" }: NavProps) {
   return (
     <nav className={containerStyles}>
-      {navLinks.map((link) => (
-        <Link
-          key={link.path}
-          to={link.path}
-          spy
-          smooth
-          offset={link.offset}
-          duration={500}
-          className={linkStyles}
-        >
-          {link.name}
-        </Link>
-      ))}
+      {sections
+        .filter((section) => section.inNav)
+        .map((section) => (
+          <ScrollLink
+            key={section.id}
+            to={section.id}
+            href={`#${section.id}`}
+            spy
+            smooth
+            offset={section.offset}
+            duration={500}
+            className={linkStyles}
+          >
+            {section.label}
+          </ScrollLink>
+        ))}
     </nav>
   );
 }

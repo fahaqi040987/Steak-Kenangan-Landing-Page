@@ -6,6 +6,7 @@
  */
 import { fadeIn } from "@/lib/variants";
 import { motion } from "framer-motion";
+import { site } from "@/content/site";
 import ReservationForm from "./ReservationForm";
 
 export default function Reservation() {
@@ -15,7 +16,7 @@ export default function Reservation() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.2 }}
-      className="xl:my-32 xl:h-[1020px] xl:bg-reservation xl:bg-no-repeat xl:flex xl:flex-col xl:justify-end xl:items-end"
+      className="xl:my-32 xl:flex xl:flex-col xl:items-center"
       id="reservation"
     >
       <motion.div
@@ -23,9 +24,12 @@ export default function Reservation() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.2 }}
-        className="bg-black w-full xl:max-w-[868px] min-h-[518px] p-8 md:p-14 xl:p-16"
+        className="bg-charcoal-soft w-full xl:max-w-[868px] min-h-[518px] p-8 md:p-14 xl:p-16"
       >
-        <h2 className="text-white mb-9 capitalize">Book a table</h2>
+        <h2 className="text-white mb-4 capitalize">Reservasi Meja</h2>
+        <p className="text-white/80 mb-9 max-w-[520px]">
+          {site.reservasi.subtitle}
+        </p>
         <ReservationForm />
       </motion.div>
     </motion.section>

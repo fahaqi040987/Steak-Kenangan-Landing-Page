@@ -1,4 +1,4 @@
-# W'Foood | Restaurant Landing Page 1 - Next.js, TypeScript, TailwindCSS, Framer Motion Frontend Project
+# Steak Kenangan | Premium Steakhouse Landing Page - Next.js, TypeScript, TailwindCSS, Framer Motion
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
@@ -7,11 +7,7 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-0055FF)](https://www.framer.com/motion/)
 
-A modern, responsive restaurant website built with Next.js 15, TypeScript, TailwindCSS, and Framer Motion. This project showcases local flavours and cuisine with smooth animations, an interactive map, and a clean UI. It is designed for both production use and as an educational resource for learning the App Router, client components, and modern React patterns. All content is static and client-friendly—no backend or API is required to run it.
-
-- **Live Demo:** [https://restaurant-wfood.vercel.app/](https://restaurant-wfood.vercel.app/)
-
-![project23](https://github.com/user-attachments/assets/77de8404-aeba-4f67-b5fe-0438e80bda73) ![Screenshot 2024-09-13 at 03 34 24](https://github.com/user-attachments/assets/1ef89f8a-e6f8-4bfa-9c95-453e35bbf4ee) ![Screenshot 2024-09-13 at 03 35 51](https://github.com/user-attachments/assets/9f3eb9e5-5dd7-46fd-9b23-aee505fa84d1) ![Screenshot 2024-09-13 at 03 34 55](https://github.com/user-attachments/assets/bd1df324-3ba9-45d9-a530-5ebce27cfe36) ![Screenshot 2024-09-13 at 03 35 12](https://github.com/user-attachments/assets/d6f0347c-3ec7-41d1-9d64-695ee0ddfd24) ![Screenshot 2024-09-13 at 03 35 33](https://github.com/user-attachments/assets/7bff98ba-b797-4c01-962e-ec0e2156bbd6)
+A modern, responsive steakhouse website for **Steak Kenangan** ("Rasa Yang Bercerita") built with Next.js 15, TypeScript, TailwindCSS, and Framer Motion. The site showcases the brand's signature menu (Menu Andalan), its journey since 2021 in Belitung, and table reservations via a WhatsApp deep link — with smooth animations, an interactive cabang map, and a clean UI. It is designed for both production use and as an educational resource for learning the App Router, client components, and modern React patterns. All content is static and client-friendly—no backend or API is required to run it.
 
 ---
 
@@ -36,7 +32,7 @@ A modern, responsive restaurant website built with Next.js 15, TypeScript, Tailw
 
 ## Project Overview
 
-**W'Food** is a single-page restaurant landing site that presents a hero section, menu items, a reservation form, an about section, an interactive map, and a footer. It is built with the **Next.js 15 App Router**, **TypeScript**, **TailwindCSS**, and **Framer Motion**. The app is fully static and frontend-only: there is no backend server, database, or API. All data (menu items, nav links, map markers) lives in the codebase under `data/` and `types/`. The project is suitable for learning Next.js App Router, client components, animations, and responsive layout patterns.
+**Steak Kenangan** is a single-page steakhouse landing site that presents a hero banner, key stats, the brand story (Tentang), its journey (Perjalanan), values (Nilai), the signature menu (Menu Andalan), a reservation form, testimonials, contact info with an interactive cabang map, and a footer. It is built with the **Next.js 15 App Router**, **TypeScript**, **TailwindCSS**, and **Framer Motion**. The app is fully static and frontend-only: there is no backend server, database, or API. All copy and asset paths live in the **content module** (`content/site.ts`) — the single source of truth — while section identity (ids, labels, nav membership, page order) lives in the **section registry** (`data/sections.tsx`), and shared types live under `types/`. The project is suitable for learning Next.js App Router, client components, animations, and responsive layout patterns.
 
 ---
 
@@ -44,20 +40,26 @@ A modern, responsive restaurant website built with Next.js 15, TypeScript, Tailw
 
 **Core features:**
 
-- **Hero section** – Full-width hero with headline, subtitle, and imagery. Uses Framer Motion for fade-in animations keyed to scroll.
-- **Menu section** – Grid of featured dishes (image, title, price). Data comes from `data/menu.ts`. Hover effects and responsive columns.
-- **Reservation section** – Form with first/last name, date picker (react-day-picker), and party size select (Radix Select). UI-only; no submission backend.
-- **About section** – Two-column layout (text + image) with scroll-triggered animations.
-- **Map section** – Interactive Leaflet map (via react-leaflet) with multiple markers and popups. Loaded only on the client via `MapDynamic` to avoid SSR issues with Leaflet.
-- **Header** – Fixed nav with logo, desktop nav links (smooth scroll via react-scroll), “Book a table” CTA, and mobile menu.
-- **Footer** – Logo, link columns (Blog, New Item, Socials), and copyright.
+- **Hero section** – Full-bleed brand banner with eyebrow, title, tagline ("Rasa Yang Bercerita"), cities, and two scroll CTAs. Framer Motion fade-ins keyed to scroll.
+- **Stats band** – Dark band with the brand's key numbers (years, menu items, cabang, guests).
+- **About section** – Two-column layout (brand story + photo) with scroll-triggered animations; CTA scrolls to Perjalanan.
+- **Perjalanan timeline** – The brand journey 2021–2025 (founding, expansions, reopening) as a vertical timeline.
+- **Nilai section** – The brand's three values plus four advantages as cards.
+- **Menu Andalan** – Grid of signature dishes with photography and IDR prices. Data comes from the content module (`content/site.ts`); hover effects and responsive columns.
+- **Reservation section** – Form with first/last name, date picker (react-day-picker), time, and party size select (Radix Select). The form hands a `ReservationRequest` to a **reservation channel** (`lib/reservation.ts`); the WhatsApp adapter opens a `wa.me` deep link — no backend required, and an HTTP backend can be swapped in behind the same interface.
+- **Testimoni** – Customer testimonials grid with 5-star ratings.
+- **Contact section** – Cabang list (Belitung, Depok Tanah Baru, Cibitung Bekasi, Jogjakarta), contact info, and an interactive Leaflet map that pins the geocodable cabang from the content module. The map is loaded only on the client via `MapDynamic` to avoid SSR issues with Leaflet.
+- **Header** – Fixed nav with logo, desktop nav links (smooth scroll via react-scroll), "Reservasi" CTA, and mobile menu.
+- **Footer** – Logo, tagline, kontak links, sosial media, and cabang list.
 
 **Technical behaviour:**
 
-- **Single route** – The only route is `/` (home). All sections are on one page; navigation uses scroll-to-section (e.g. `#home`, `#menu`, `#about`, `#contact`, `#reservation`).
-- **Client components** – Interactive pieces use `"use client"` (Header, Hero, Menu, About, Footer, Map, Nav, NavMobile, Reservation, ReservationForm, UI primitives).
+- **Single route, registry-driven composition** – The only route is `/`. `app/page.tsx` renders sections in the order defined by the section registry (`data/sections.tsx`); a `Record<SectionId, ComponentType>` map makes a missing section component a type error. Navigation smooth-scrolls to section ids (`#home`, `#about`, `#perjalanan`, `#menu`, `#testimoni`, `#contact`).
+- **Content module** – All brand copy and asset paths come from `content/site.ts`; components never hardcode copy.
+- **Client components** – Interactive pieces use `"use client"` (Header, Hero, Menu, About, Timeline, Values, Testimonials, Contact, Reservation, ReservationForm, Footer, Map, Nav, NavMobile, UI primitives).
 - **Dynamic import** – The map is wrapped in `MapDynamic`, which uses `next/dynamic` with `ssr: false` so Leaflet runs only in the browser.
-- **SEO** – Metadata (title, description, keywords, Open Graph, Twitter, icons, author) is set in `app/layout.tsx` for better search and sharing.
+- **Token seam** – The whole visual identity (palette, fonts, shadows) is defined once in `tailwind.config.js`; components reference semantic tokens only (`bg-cream`, `text-charcoal`, `text-gold`, `font-serif`), so rebranding is a single edit point.
+- **SEO** – Metadata (title, description, keywords, Open Graph, Twitter, icons) is set in `app/layout.tsx` with Indonesian locale (`id_ID`) and metadataBase `https://steakkenangan.com`.
 
 ---
 
@@ -69,9 +71,9 @@ A modern, responsive restaurant website built with Next.js 15, TypeScript, Tailw
 | Language      | TypeScript 5.6                                                                           |
 | UI            | React 18.3                                                                               |
 | Styling       | TailwindCSS 3.4, tailwindcss-animate                                                     |
-| Fonts         | Next.js Google Fonts (Lora, Poppins)                                                     |
+| Fonts         | Next.js Google Fonts (Playfair Display, Inter)                                           |
 | Animation     | Framer Motion 11                                                                         |
-| Maps          | Leaflet, react-leaflet                                                                   |
+| Maps          | Leaflet (plain, StrictMode-safe)                                                         |
 | UI primitives | Radix UI (Label, Popover, Select, Slot)                                                  |
 | Icons         | Lucide React, React Icons                                                                |
 | Utilities     | clsx, tailwind-merge, class-variance-authority, date-fns, react-scroll, react-responsive |
@@ -81,25 +83,29 @@ A modern, responsive restaurant website built with Next.js 15, TypeScript, Tailw
 ## Project Structure
 
 ```bash
-restaurant-1/
+Steak-Kenangan-Landing-Page/
 ├── app/
 │   ├── layout.tsx      # Root layout, fonts, metadata, global styles
-│   ├── page.tsx        # Home page: composes all sections
+│   ├── page.tsx        # Home page: composes all sections via the registry
 │   ├── globals.css     # Tailwind directives + base styles
 │   └── favicon.ico     # Site favicon
 ├── components/
 │   ├── Header.tsx      # Fixed header, logo, nav, CTA, mobile menu
 │   ├── Hero.tsx        # Hero section with motion animations
-│   ├── Menu.tsx        # Menu grid (data from data/menu.ts)
-│   ├── Reservation.tsx # Reservation section wrapper
-│   ├── ReservationForm.tsx # Form: name, date picker, party size
+│   ├── Stats.tsx       # Key-numbers band
 │   ├── About.tsx       # About section (text + image)
-│   ├── Map.tsx         # Leaflet map with markers (client-only)
+│   ├── Timeline.tsx    # Perjalanan: 2021–2025 vertical timeline
+│   ├── Values.tsx      # Nilai: values + advantages cards
+│   ├── Menu.tsx        # Menu Andalan grid (content module)
+│   ├── Reservation.tsx # Reservation section wrapper
+│   ├── ReservationForm.tsx # Form → reservation channel (WhatsApp today)
+│   ├── Testimonials.tsx# Testimoni grid with ratings
+│   ├── Contact.tsx     # Kontak: cabang list, contact info, map
+│   ├── Map.tsx         # Leaflet map, pins cabang with coords (client-only)
 │   ├── MapDynamic.tsx  # Dynamic wrapper for Map (ssr: false)
-│   ├── Footer.tsx      # Footer with links and copyright
-│   ├── Nav.tsx         # Desktop nav (react-scroll links)
+│   ├── Footer.tsx      # Footer with tagline, links, cabang
+│   ├── Nav.tsx         # Desktop nav (registry-driven scroll links)
 │   ├── NavMobile.tsx   # Mobile menu with icons
-│   ├── StyleGuide.tsx  # Style guide / UI showcase
 │   └── ui/             # Reusable UI primitives
 │       ├── button.tsx
 │       ├── input.tsx
@@ -107,20 +113,20 @@ restaurant-1/
 │       ├── select.tsx
 │       ├── popover.tsx
 │       └── calendar.tsx
+├── content/
+│   └── site.ts         # Content module: single source of truth for copy/assets
 ├── data/
-│   ├── menu.ts         # Menu items (img, title, price)
-│   ├── navLinks.ts     # Desktop nav (path, name, offset)
-│   ├── navMobileLinks.tsx # Mobile nav with icons
-│   └── mapMarkers.ts   # Map marker data (position, title, subtitle, image)
+│   └── sections.tsx    # Section registry: ids, labels, offsets, icons, nav, order
 ├── lib/
+│   ├── reservation.ts  # ReservationChannel seam + WhatsApp adapter
 │   ├── utils.ts        # cn() – merge Tailwind classes
-│   └── variants.ts    # Framer Motion fadeIn variants
+│   └── variants.ts     # Framer Motion fadeIn variants
 ├── types/
-│   ├── index.ts        # MenuItem, NavLinkConfig, MapMarkerData, etc.
+│   ├── index.ts        # FadeDirection, MenuItem, CabangEntry, ContactInfo, etc.
 │   └── react-scroll.d.ts # Type declaration for react-scroll
 ├── public/             # Static assets (images, icons)
 ├── next.config.mjs
-├── tailwind.config.js
+├── tailwind.config.js  # Token seam: palette, fonts, shadows
 ├── tsconfig.json
 ├── vercel.json         # Rewrites for SPA-style routing on Vercel
 └── package.json
@@ -138,7 +144,7 @@ restaurant-1/
 
    ```bash
    git clone <repository-url>
-   cd restaurant-1
+   cd Steak-Kenangan-Landing-Page
    ```
 
 2. Install dependencies:
@@ -174,7 +180,7 @@ If you later add features that need configuration (e.g. analytics, a contact for
 2. Add variables such as:
 
    ```env
-   NEXT_PUBLIC_SITE_URL=https://restaurant-wfood.vercel.app
+   NEXT_PUBLIC_SITE_URL=https://steakkenangan.com
    # Optional examples:
    # NEXT_PUBLIC_ANALYTICS_ID=...
    # CONTACT_FORM_ENDPOINT=...
@@ -188,9 +194,9 @@ For the current codebase, no env vars are read; this section is for future use o
 
 ## Routes & Navigation
 
-- **Route:** There is a single route, `/`, defined by `app/page.tsx`. It renders the main layout with all sections (Header, Hero, Menu, Reservation, About, Map, Footer).
+- **Route:** There is a single route, `/`, defined by `app/page.tsx`. It renders the Header, then every section in registry order (home, stats, about, perjalanan, nilai, menu, reservation, testimoni, contact), then the Footer.
 
-- **In-page navigation:** Links in the header and mobile menu use **react-scroll** to smooth-scroll to section IDs: `#home`, `#menu`, `#about`, `#contact`, `#reservation`. Section IDs are set on the corresponding `<section>` elements (e.g. `id="home"`, `id="menu"`).
+- **In-page navigation:** Links in the header and mobile menu use **react-scroll** to smooth-scroll to section IDs driven by the section registry (`data/sections.tsx`): `#home`, `#about`, `#perjalanan`, `#menu`, `#testimoni`, `#contact` (only sections flagged `inNav` appear in navigation). Section IDs are set on the corresponding `<section>` elements (e.g. `id="home"`, `id="menu"`).
 
 - **Vercel rewrites:** `vercel.json` rewrites all non-asset paths to `/` so that refreshing the page on any path still serves the app (SPA-style behaviour on Vercel).
 
@@ -201,40 +207,49 @@ There are no API routes or server-only routes in this project.
 ## Components Walkthrough
 
 **app/layout.tsx**  
-Root layout: loads Lora and Poppins via `next/font/google`, applies `globals.css`, and exports `metadata` (title, description, keywords, Open Graph, Twitter, icons, author, etc.). Renders `<html>` and `<body>` with font variables and background styles.
+Root layout: loads Playfair Display (headings serif) and Inter (body sans) via `next/font/google`, applies `globals.css`, and exports `metadata` (title, description, keywords, Open Graph with `id_ID` locale, Twitter, icons) with `metadataBase` set to `https://steakkenangan.com`. Renders `<html lang="id">` and `<body>` with font variables; backgrounds come from `globals.css` (`bg-cream`), keeping the tailwind token seam as the single edit point.
+
+**content/site.ts (content module)**  
+The single source of truth for all brand copy and asset paths — brand, hero, stats, about, perjalanan, nilai, menu items, testimonials, reservation config (including the WhatsApp number), cabang, and footer. Components never hardcode copy.
+
+**data/sections.tsx (section registry)**  
+The single seam for section identity: ids, nav labels, scroll offsets, mobile-nav icons, nav membership, and page order. Nav, NavMobile, Header's CTA target, and `app/page.tsx` composition all read from it.
 
 **app/page.tsx**  
-Server component that composes the single page: Header, Hero, Menu, Reservation, About, MapDynamic, Footer inside a `<main>` container.
+Server component that composes the single page: Header, then each registry section via a `Record<SectionId, ComponentType>` map (Hero, Stats, About, Timeline, Values, Menu, Reservation, Testimonials, Contact), then Footer inside a `<main>` container.
 
 **Header**  
-Client component. Tracks scroll position; toggles header background after 100px. Renders logo (Next.js `Link` + `Image`), desktop `Nav`, a react-scroll “Book a table” button, and `NavMobile` for small screens.
+Client component. Tracks scroll position; toggles header background after 100px. Renders the white brand logo (Next.js `Image`), desktop `Nav`, a react-scroll CTA button (target from the registry via `getSection`), and `NavMobile` for small screens.
 
-**Nav**  
-Uses `Link` from react-scroll to scroll to section IDs. Link list and offsets come from `data/navLinks.ts`.
-
-**NavMobile**  
-Mobile menu: hamburger icon toggles a full-screen overlay with logo, scroll links (with icons from `data/navMobileLinks.tsx`), and “Book a table” button.
+**Nav / NavMobile**  
+Desktop nav renders react-scroll `Link`s for registry sections flagged `inNav`; NavMobile is a full-screen overlay with logo, icon scroll links, and the CTA button. Labels, offsets, and icons all come from the registry.
 
 **Hero**  
-Hero block with headline, byline, and CTA. Uses Framer Motion’s `motion.*` and `fadeIn` from `lib/variants.ts` for scroll-triggered animations. Images via Next.js `Image`.
+Full-bleed banner with eyebrow, title, tagline, cities, and two scroll CTAs. Uses Framer Motion's `motion.*` and `fadeIn` from `lib/variants.ts` for scroll-triggered animations. Images via Next.js `Image`.
+
+**Stats / Timeline (Perjalanan) / Values (Nilai) / Testimonials / Contact**  
+Registry sections rendered from content-module data with staggered Framer Motion fade-ins: key numbers, the 2021–2025 brand journey as a vertical timeline, three values plus four advantages, testimonials with ratings, and the kontak section (cabang list, contact info, and the map).
 
 **Menu**  
-Reads `menuItems` from `data/menu.ts` and renders a responsive grid. Each item shows image, title, and price with hover effects.
+Renders signature dishes from `site.menu.items` (content module) as a responsive grid with photography-only cards; image scales on hover.
 
 **Reservation & ReservationForm**  
-Reservation is a wrapper with motion; the form inside uses Radix Popover + react-day-picker for the date and Radix Select for party size. No submit handler; form is UI-only.
+Reservation is a dark card wrapper with motion. The form uses Radix Popover + react-day-picker for the date, Radix Select for party size, and hands a `ReservationRequest` to the reservation channel (`lib/reservation.ts`). The WhatsApp adapter builds a `wa.me` deep link (message formatted with the Indonesian date-fns locale) and opens it in a new tab; swapping in the PRD's HTTP backend is a one-line change behind the same `ReservationChannel` interface.
 
 **About**  
-Two-column layout (text + image) with motion variants.
+Two-column layout (brand story + photo) with motion variants; CTA scrolls to Perjalanan.
 
 **Map & MapDynamic**  
-`Map` uses react-leaflet (MapContainer, TileLayer, Marker, Popup) and `mapMarkers` from `data/mapMarkers.ts`. It is only loaded on the client; `MapDynamic` uses `dynamic(() => import('@/components/Map'), { ssr: false })` so the map does not run during SSR.
+`Map` uses plain Leaflet (StrictMode-safe init/cleanup — see the module comment for why not react-leaflet) and plots only the cabang entries that carry `coords` in the content module; it is only loaded on the client. `MapDynamic` uses `dynamic(() => import('@/components/Map'), { ssr: false })` so the map does not run during SSR.
 
 **Footer**  
-Footer with logo, link groups, and copyright. All links currently point to `/`.
+Footer with logo, tagline, kontak links, sosial media, and cabang list — all from the content module.
 
 **components/ui/**  
-Reusable primitives built on Radix (button, input, label, select, popover) and react-day-picker (calendar). Styled with Tailwind and the `cn()` helper from `lib/utils.ts`.
+Reusable primitives built on Radix (button, input, label, select, popover) and react-day-picker (calendar). Styled with Tailwind semantic tokens and the `cn()` helper from `lib/utils.ts`.
+
+**lib/reservation.ts (reservation channel seam)**  
+Turns form fields into a `ReservationRequest` and hands it to a `ReservationChannel`. `buildReservationLink` is a pure function (request → wa.me URL); `createWhatsAppChannel` is today's adapter, and the PRD's HTTP reservation backend plugs in later behind the same interface.
 
 ---
 
@@ -252,7 +267,7 @@ Reusable primitives built on Radix (button, input, label, select, popover) and r
 
 **Radix UI** – Accessible primitives (Label, Popover, Select, Slot). Used in ReservationForm and in `components/ui/` for consistent, accessible form and overlay behaviour.
 
-**Leaflet & react-leaflet** – Map library and React bindings. The map is rendered only on the client to avoid “window is not defined” during SSR.
+**Leaflet** – Map library used directly (no React bindings). Pins the geocodable cabang from the content module and is rendered only on the client to avoid “window is not defined” during SSR.
 
 **date-fns & react-day-picker** – Date formatting and calendar UI for the reservation date field.
 
@@ -296,13 +311,13 @@ Copy `components/ui/button.tsx` and `lib/utils.ts`. Install `class-variance-auth
 
 ## Keywords
 
-restaurant, local food, dining, W'Food, restaurant website, food menu, book table, restaurant reservation, local flavours, modern restaurant, fine dining, gourmet food, restaurant menu, online reservation, restaurant booking, Next.js, React, TypeScript, TailwindCSS, Framer Motion, Leaflet, Radix UI, App Router, static site, frontend, learning project, open source.
+restaurant, steakhouse, Steak Kenangan, iga bakar, dining, restaurant website, food menu, book table, restaurant reservation, rasa yang bercerita, modern restaurant, fine dining, gourmet food, restaurant menu, online reservation, restaurant booking, Next.js, React, TypeScript, TailwindCSS, Framer Motion, Leaflet, Radix UI, App Router, static site, frontend, learning project, open source.
 
 ---
 
 ## Conclusion
 
-This repository is a **frontend-only**, **single-page** restaurant landing site built with Next.js 15, TypeScript, TailwindCSS, and Framer Motion. It has **no backend or API**; all data is in the repo under `data/` and `types/`. It is suitable for learning the App Router, client components, animations, and responsive layout, and can be extended with a backend, CMS, or analytics later. Use the Live Demo link above to see it in action and the Table of Contents to jump to any section of this README.
+This repository is a **frontend-only**, **single-page** steakhouse landing site for Steak Kenangan, built with Next.js 15, TypeScript, TailwindCSS, and Framer Motion. It has **no backend or API**; all copy lives in the content module (`content/site.ts`), section identity in the registry (`data/sections.tsx`), and shared types under `types/`. It is suitable for learning the App Router, client components, animations, and responsive layout, and can be extended with a backend (e.g. the HTTP reservation adapter), CMS, or analytics later. Use the Table of Contents to jump to any section of this README.
 
 ---
 
