@@ -24,19 +24,18 @@ const defaultClassNames = {
   nav_button_next: "absolute right-1",
   table: "w-full border-collapse space-y-1",
   head_row: "flex",
-  head_cell: "text-charcoal w-9 font-normal text-[0.8rem]",
+  head_cell: "text-cream/70 w-9 font-normal text-[0.8rem]",
   row: "flex w-full mt-2",
-  cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-slate-100/50 [&:has([aria-selected])]:bg-slate-100 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20 dark:[&:has([aria-selected].day-outside)]:bg-slate-800/50 dark:[&:has([aria-selected])]:bg-slate-800",
+  cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-gold/10 [&:has([aria-selected])]:bg-gold/15 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
   day: "",
   day_range_end: "day-range-end",
   day_selected:
-    "bg-gold text-charcoal hover:bg-gold/90 hover:text-charcoal focus:bg-charcoal focus:text-cream",
-  day_today: "bg-charcoal/10 text-charcoal",
+    "bg-gold text-charcoal hover:bg-gold/90 hover:text-charcoal focus:bg-gold focus:text-charcoal",
+  day_today: "bg-gold/10 text-gold",
   day_outside:
-    "day-outside text-slate-500 opacity-50 aria-selected:bg-slate-100/50 aria-selected:text-slate-500 aria-selected:opacity-30 dark:text-slate-400 dark:aria-selected:bg-slate-800/50 dark:aria-selected:text-slate-400",
-  day_disabled: "text-slate-500 opacity-50 dark:text-slate-400",
-  day_range_middle:
-    "aria-selected:bg-slate-100 aria-selected:text-slate-900 dark:aria-selected:bg-slate-800 dark:aria-selected:text-slate-50",
+    "day-outside text-cream/40 opacity-50 aria-selected:bg-gold/10 aria-selected:text-cream/40 aria-selected:opacity-30",
+  day_disabled: "text-cream/40 opacity-50",
+  day_range_middle: "aria-selected:bg-gold/15 aria-selected:text-cream",
   day_hidden: "invisible",
 };
 

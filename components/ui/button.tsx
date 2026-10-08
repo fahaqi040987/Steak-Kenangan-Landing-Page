@@ -14,16 +14,16 @@ import { cn } from "@/lib/utils";
  *  Pill shape + uppercase tracking = the modern-bistro CTA style. Widths are content-driven
  *  (min-w, not fixed w) so longer labels never overflow. Hover lifts via transform only. */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap text-sm font-semibold uppercase tracking-[0.08em] rounded-full transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap text-sm font-semibold uppercase tracking-[0.08em] rounded-full transition-[background-color,color,box-shadow,transform] duration-300 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default: "text-charcoal bg-gold hover:bg-gold-hover hover:shadow-primary",
         gold: "text-charcoal bg-gold hover:bg-gold-hover hover:shadow-primary",
-        outline: "text-charcoal border border-gold hover:bg-gold/10",
+        outline: "text-gold border border-gold hover:bg-gold/15",
         input:
           "bg-white/5 border border-white/10 text-white hover:bg-white/10 focus-visible:ring-gold focus-visible:ring-offset-transparent",
-        ghost: "hover:bg-black/5",
+        ghost: "hover:bg-white/10",
       },
       size: {
         default: "min-w-[170px] h-[56px] px-8",

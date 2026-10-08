@@ -21,7 +21,7 @@ export default function Values() {
           viewport={{ once: false, amount: 0.2 }}
           className="text-center max-w-[570px] mx-auto mb-14"
         >
-          <p className="text-gold-deep uppercase tracking-[0.2em] font-semibold mb-3">
+          <p className="text-gold uppercase tracking-[0.2em] font-semibold mb-3">
             Nilai-Nilai Kami
           </p>
           <h2>{nilai.title}</h2>
@@ -35,7 +35,7 @@ export default function Values() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}
-              className="bg-white shadow-primary p-10 text-center rounded-2xl"
+              className="bg-charcoal-soft border border-white/10 shadow-primary p-10 text-center rounded-2xl"
             >
               <span className="text-gold text-3xl block mb-4">◆</span>
               <h3 className="mb-3">{value.title}</h3>
@@ -52,7 +52,7 @@ export default function Values() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}
-              className="border border-line bg-white/60 p-8 rounded-xl"
+              className="border border-white/10 bg-white/5 p-8 rounded-xl"
             >
               <h4 className="font-serif font-bold text-lg mb-2">
                 {advantage.title}

@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-status-bar-style": "default",
     "mobile-web-app-capable": "yes",
     // Literal hex required by the theme-color spec — the one sanctioned copy;
-    // mirrors `cream` in tailwind.config.js, the token seam.
-    "theme-color": "#F7F1E6",
+    // mirrors `charcoal` in tailwind.config.js, the token seam.
+    "theme-color": "#18120C",
   },
   creator: "Arnob Mahmud",
   publisher: "Steak Kenangan",
@@ -119,7 +119,7 @@ export const metadata: Metadata = {
 /**
  * Root layout: html lang matches the content locale (Indonesian); font CSS vars
  * come from next/font. Backgrounds are NOT set inline — globals.css @layer base
- * applies bg-cream to html/body, so the tailwind token seam stays the single edit point.
+ * applies bg-charcoal to html/body, so the tailwind token seam stays the single edit point.
  */
 export default function RootLayout({
   children,
@@ -130,7 +130,7 @@ export default function RootLayout({
         {/* Skip link: first tab stop, jumps past the fixed header into the page */}
         <a
           href="#home"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-charcoal focus:text-gold focus:px-4 focus:py-2 focus:rounded-full"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-gold focus:text-charcoal focus:px-4 focus:py-2 focus:rounded-full"
         >
           Langsung ke konten
         </a>

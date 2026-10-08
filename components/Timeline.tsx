@@ -21,7 +21,7 @@ export default function Timeline() {
           viewport={{ once: false, amount: 0.2 }}
           className="text-center max-w-[570px] mx-auto mb-14"
         >
-          <p className="text-gold-deep uppercase tracking-[0.2em] font-semibold mb-3">
+          <p className="text-gold uppercase tracking-[0.2em] font-semibold mb-3">
             Perjalanan Kami
           </p>
           <h2>{perjalanan.title}</h2>
@@ -38,7 +38,7 @@ export default function Timeline() {
               className="relative"
             >
               <span className="absolute -left-[41px] xl:-left-[57px] top-1 w-4 h-4 rounded-full bg-gold ring-4 ring-gold/20" />
-              <span className="font-serif font-bold text-gold-deep text-xl">
+              <span className="font-serif font-bold text-gold text-xl">
                 {entry.year}
               </span>
               <h3 className="mb-2 mt-1">{entry.title}</h3>

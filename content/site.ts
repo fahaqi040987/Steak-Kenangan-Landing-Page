@@ -218,12 +218,9 @@ export const site = {
         coords: { lat: -6.3859, lng: 106.8334 },
       },
       {
-        name: "Cibitung — Bekasi",
-        detail: "Melayani area Bekasi dan sekitarnya (sejak 2023)",
-      },
-      {
-        name: "Jogjakarta",
-        detail: "Kota destinasi pariwisata nasional (sejak Des 2024)",
+        name: "Depok — Kukusan",
+        detail: "Jl. Palakali No.49b, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16425",
+        coords:{lat : -6.36905458100729, lng: 106.81721264734635}
       },
     ] as CabangEntry[],
     reach: [

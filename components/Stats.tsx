@@ -15,7 +15,7 @@ export default function Stats() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.2 }}
-      className="bg-charcoal py-14 text-white"
+      className="bg-charcoal-soft py-14 text-white"
       id="stats"
     >
       <div className="container mx-auto">

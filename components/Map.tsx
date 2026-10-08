@@ -37,9 +37,9 @@ export default function Map() {
       zoomControl: false,
     });
 
-    // CartoDB light tiles; attribution required by OpenStreetMap
+    // CartoDB dark tiles match the site's charcoal theme; attribution required by OSM
     L.tileLayer(
-      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
       {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -84,7 +84,7 @@ export default function Map() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.4 }}
-      className="relative xl:after:w-full xl:after:h-[240px] xl:after:bg-gradient-to-b xl:after:from-white xl:after:via-white/80 xl:after:to-white/20 xl:after:absolute xl:after:top-0 xl:after:z-20"
+      className="relative xl:after:w-full xl:after:h-[240px] xl:after:bg-gradient-to-b xl:after:from-charcoal xl:after:via-charcoal/80 xl:after:to-charcoal/20 xl:after:absolute xl:after:top-0 xl:after:z-20"
     >
       <div
         ref={containerRef}

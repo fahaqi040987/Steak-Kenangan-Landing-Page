@@ -12,7 +12,7 @@ export default function Testimonials() {
   const { testimoni } = site;
 
   return (
-    <section className="py-16 xl:py-24 bg-white" id="testimoni">
+    <section className="py-16 xl:py-24" id="testimoni">
       <div className="container mx-auto">
         <motion.div
           variants={fadeIn("up", 0.2)}
@@ -21,7 +21,7 @@ export default function Testimonials() {
           viewport={{ once: false, amount: 0.2 }}
           className="text-center max-w-[570px] mx-auto mb-14"
         >
-          <p className="text-gold-deep uppercase tracking-[0.2em] font-semibold mb-3">
+          <p className="text-gold uppercase tracking-[0.2em] font-semibold mb-3">
             Testimoni
           </p>
           <h2>{testimoni.title}</h2>
@@ -35,7 +35,7 @@ export default function Testimonials() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}
-              className="border border-line bg-white rounded-2xl p-8 shadow-primary/40 hover:shadow-primary transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 flex flex-col"
+              className="border border-white/10 bg-charcoal-soft rounded-2xl p-8 hover:border-gold/40 transition-[box-shadow,transform,border-color] duration-300 hover:-translate-y-0.5 flex flex-col"
             >
               <span
                 className="text-gold tracking-[0.2em] mb-4"
@@ -43,14 +43,14 @@ export default function Testimonials() {
               >
                 ★★★★★
               </span>
-              <blockquote className="italic text-charcoal/80 leading-7 mb-6 flex-1">
+              <blockquote className="italic text-cream/80 leading-7 mb-6 flex-1">
                 &ldquo;{item.quote}&rdquo;
               </blockquote>
               <figcaption>
-                <span className="font-semibold text-charcoal block">
+                <span className="font-semibold text-cream block">
                   {item.name}
                 </span>
-                <span className="text-grey text-sm">{item.role}</span>
+                <span className="text-cream/60 text-sm">{item.role}</span>
               </figcaption>
             </motion.figure>
           ))}

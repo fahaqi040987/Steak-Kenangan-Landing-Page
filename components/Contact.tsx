@@ -22,7 +22,7 @@ export default function Contact() {
           viewport={{ once: false, amount: 0.2 }}
           className="text-center max-w-[570px] mx-auto mb-14"
         >
-          <p className="text-gold-deep uppercase tracking-[0.2em] font-semibold mb-3">
+          <p className="text-gold uppercase tracking-[0.2em] font-semibold mb-3">
             Kunjungi Kami
           </p>
           <h2>{kontak.title}</h2>
@@ -41,10 +41,10 @@ export default function Contact() {
                 <li key={branch.name} className="flex gap-3">
                   <span className="text-gold">◆</span>
                   <div>
-                    <span className="font-semibold text-charcoal block">
+                    <span className="font-semibold text-cream block">
                       {branch.name}
                     </span>
-                    <span className="text-grey text-sm">{branch.detail}</span>
+                    <span className="text-cream/60 text-sm">{branch.detail}</span>
                   </div>
                 </li>
               ))}
@@ -61,7 +61,7 @@ export default function Contact() {
             <ul className="space-y-4">
               {[...kontak.reach, ...kontak.sosial].map((item) => (
                 <li key={item.label} className="flex flex-col">
-                  <span className="text-grey text-sm uppercase tracking-wider">
+                  <span className="text-cream/60 text-sm uppercase tracking-wider">
                     {item.label}
                   </span>
                   {item.href ? (
@@ -69,12 +69,12 @@ export default function Contact() {
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel="noopener noreferrer"
-                      className="text-charcoal hover:text-gold font-medium"
+                      className="text-cream hover:text-gold font-medium"
                     >
                       {item.text}
                     </a>
                   ) : (
-                    <span className="text-charcoal font-medium">{item.text}</span>
+                    <span className="text-cream font-medium">{item.text}</span>
                   )}
                 </li>
               ))}

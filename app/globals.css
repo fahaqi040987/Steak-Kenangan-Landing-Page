@@ -10,9 +10,11 @@
   }
 
   /* Smooth anchor scrolling; scroll-margin keeps the fixed header from covering section tops.
-     Reduced-motion users get instant jumps instead. */
+     Reduced-motion users get instant jumps instead. Dark scheme so native controls
+     (scrollbars, form widgets) match the charcoal surface. */
   html {
-    @apply bg-cream;
+    @apply bg-charcoal;
+    color-scheme: dark;
     scroll-behavior: smooth;
   }
   @media (prefers-reduced-motion: reduce) {
@@ -36,7 +38,7 @@
     @apply bg-gold text-charcoal;
   }
   body {
-    @apply font-sans bg-cream text-charcoal tracking-[0.4px];
+    @apply font-sans bg-charcoal text-cream tracking-[0.4px];
   }
   h1,
   h2,
@@ -45,11 +47,12 @@
     text-wrap: balance;
   }
 
-  /* Keyboard focus ring — #8C6D2F is `gold.deep` from the token seam (sanctioned literal:
-     the CSS LSP can't resolve theme(); the seam stays the source of truth for this value). */
+  /* Keyboard focus ring — #C0923E is `gold.DEFAULT` from the token seam (sanctioned literal:
+     the CSS LSP can't resolve theme(); the seam stays the source of truth for this value).
+     The brighter gold (not gold.deep) is used because the site surface is dark. */
   a:focus-visible,
   summary:focus-visible {
-    outline: 2px solid #8c6d2f;
+    outline: 2px solid #c0923e;
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -65,30 +68,26 @@
     @apply text-[20px] leading-[30px];
   }
   p {
-    @apply text-charcoal/80 leading-8;
+    @apply text-cream/80 leading-8;
   }
-  /* Links inherit their surface color (footer/hero are dark, sections are cream); hover shows gold.
+  /* Links inherit their surface color (the whole site is dark); hover shows gold.
      transition-colors only — never transition:all (guidelines). */
   a {
     color: inherit;
     @apply transition-colors duration-300 cursor-pointer;
   }
   a:hover {
-    @apply text-gold-deep;
-  }
-  /* Dark surfaces keep the brighter gold on hover (deep gold is for light backgrounds) */
-  .bg-charcoal a:hover,
-  .bg-charcoal-soft a:hover {
     @apply text-gold;
   }
   label {
     @apply text-white text-sm uppercase font-normal block mb-2;
   }
+  /* Active nav state: react-scroll spy adds .active to the current anchor link.
+     The header underline grows to full width for the section in view. */
   .active {
-    @apply text-gold-deep;
-  }
-  .bg-charcoal .active,
-  .bg-charcoal-soft .active {
     @apply text-gold;
+  }
+  .nav-link.active .nav-underline {
+    @apply w-full;
   }
 }

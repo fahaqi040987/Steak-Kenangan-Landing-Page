@@ -31,7 +31,7 @@ const sectionComponents: Record<SectionId, ComponentType> = {
 
 export default function Home() {
   return (
-    <main className="w-full max-w-[1440px] bg-white mx-auto overflow-hidden">
+    <main className="w-full max-w-[1440px] bg-charcoal mx-auto overflow-hidden">
       <Header />
       {sections.map((section) => {
         const SectionComponent = sectionComponents[section.id];

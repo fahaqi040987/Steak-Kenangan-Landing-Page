@@ -24,7 +24,7 @@ export default function Reservation() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.2 }}
-        className="bg-charcoal-soft w-full xl:max-w-[868px] min-h-[518px] p-8 md:p-14 xl:p-16"
+        className="bg-charcoal-soft border border-white/10 w-full xl:max-w-[868px] min-h-[518px] p-8 md:p-14 xl:p-16"
       >
         <h2 className="text-white mb-4 capitalize">Reservasi Meja</h2>
         <p className="text-white/80 mb-9 max-w-[520px]">

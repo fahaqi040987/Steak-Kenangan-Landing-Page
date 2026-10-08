@@ -19,7 +19,7 @@ export default function Footer() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0 }}
-      className="bg-charcoal text-white pt-16"
+      className="bg-charcoal-soft text-cream pt-16 border-t border-white/10"
     >
       <div className="container mx-auto">
         <div className="flex flex-col justify-between xl:flex-row">

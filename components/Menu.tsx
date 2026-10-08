@@ -16,7 +16,7 @@ export default function Menu() {
 
   return (
     <section
-      className="relative py-12 xl:py-24 bg-cream-soft"
+      className="relative py-12 xl:py-24 bg-charcoal-soft"
       id="menu"
     >
       <div className="container mx-auto">
@@ -29,7 +29,7 @@ export default function Menu() {
           className="max-w-[570px] mx-auto text-center"
         >
           <h2 className="mb-3">{site.menu.title}</h2>
-          <p className="text-grey mb-16">{site.brand.concept}</p>
+          <p className="text-cream/60 mb-16">{site.brand.concept}</p>
         </motion.div>
         <motion.div
           variants={fadeIn("up", 0.4)}
@@ -41,7 +41,7 @@ export default function Menu() {
           {featured.map((item) => (
             <div
               key={item.name}
-              className="max-w-[350px] w-full bg-white shadow-primary rounded-2xl overflow-hidden mx-auto xl:mx-0 group transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-primary/80"
+              className="max-w-[350px] w-full bg-charcoal border border-white/10 shadow-primary rounded-2xl overflow-hidden mx-auto xl:mx-0 group transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-primary/80"
             >
               <div className="overflow-hidden">
                 {item.img && (
@@ -56,10 +56,10 @@ export default function Menu() {
                 )}
               </div>
               <div className="pt-[20px] pb-[28px] px-[30px]">
-                <h3 className="font-sans text-charcoal mb-[14px]">
+                <h3 className="font-sans text-cream mb-[14px]">
                   {item.name}
                 </h3>
-                <div className="text-xl font-sans font-semibold text-gold-deep tabular-nums">
+                <div className="text-xl font-sans font-semibold text-gold tabular-nums">
                   {item.price}
                 </div>
               </div>
@@ -71,7 +71,7 @@ export default function Menu() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.2 }}
-          className="text-center text-grey text-sm mt-12"
+          className="text-center text-cream/60 text-sm mt-12"
         >
           {site.menu.note}
         </motion.p>

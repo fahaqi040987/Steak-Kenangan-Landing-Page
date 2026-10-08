@@ -58,7 +58,7 @@ export default function NavMobile({
       <aside
         className={`${
           isOpen ? "right-0 visible" : "-right-full invisible"
-        } bg-charcoal fixed z-20 w-full p-10 top-0 bottom-0 transition-[right,visibility] duration-500`}
+        } bg-charcoal/95 backdrop-blur-md fixed z-20 w-full p-10 top-0 bottom-0 transition-[right,visibility] duration-500`}
         aria-hidden={!isOpen}
       >
         <div className="flex flex-col items-center justify-between h-full">

@@ -1,41 +1,39 @@
 "use client";
 
 /**
- * Header – Fixed top bar with logo, desktop nav, CTA, and mobile menu.
- * Uses scroll state to switch from transparent to solid background after 100px.
- * Logo and CTA label come from content/site; CTA target from the section registry.
+ * Header – Fixed top bar with logo, desktop nav, and mobile menu.
+ * Transparent over the hero at rest; fully opaque charcoal with a shadow after 50px of
+ * scroll or on hover, so the nav always sits on a readable surface. Opaque on purpose:
+ * translucent bg + backdrop-blur rendered a light fringe along the bar's bottom edge
+ * (the "white line" artifact). Logo anchors left; nav sits at the right edge.
  */
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { site } from "@/content/site";
-import { getSection } from "@/data/sections";
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
-import { Button } from "./ui/button";
 import ScrollLink from "./ui/scroll-link";
 
 export default function Header() {
-  /** When true, header shows dark background (scrolled past 100px). */
+  /** When true, header shows opaque charcoal background (scrolled past 50px). */
   const [active, setActive] = useState(false);
 
-  /** Subscribe to scroll; set active when scrollY > 100. Cleanup removes listener. */
+  /** Subscribe to scroll; set active when scrollY > 50. Cleanup removes listener. */
   useEffect(() => {
     const handleScroll = () => {
-      setActive(window.scrollY > 100);
+      setActive(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const reservation = getSection("reservation");
-
   return (
     <header
       className={`${
         active
-          ? "bg-charcoal-soft/90 backdrop-blur-md shadow-primary py-3 border-b border-white/10"
-          : "bg-none py-8 border-b border-transparent"
-      } fixed top-0 w-full z-50 left-0 right-0 transition-[background-color,padding,box-shadow,border-color] duration-300`}
+          ? "bg-charcoal shadow-lg py-3"
+          : "bg-transparent py-5"
+      } hover:bg-charcoal hover:shadow-lg hover:py-3 fixed top-0 w-full z-50 left-0 right-0 transition-[background-color,padding,box-shadow] duration-300`}
     >
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
@@ -48,30 +46,20 @@ export default function Header() {
             className="cursor-pointer"
           >
             <Image
-              src={site.brand.logoWhite}
+              src={site.brand.logoDark}
               width={160}
               height={50}
               alt={site.brand.name}
-              className="h-10 w-auto"
+              className="h-22 w-auto"
               priority
             />
           </ScrollLink>
-          {/* Desktop nav: hidden on small screens, visible from xl. */}
+          {/* Desktop nav: hidden on small screens, visible from xl. Cream links over
+              the dark hero/charcoal page; gold hover + active handled in globals/Nav. */}
           <Nav
-            containerStyles="hidden xl:flex gap-x-12 text-white"
-            linkStyles="capitalize"
+            containerStyles="hidden xl:flex items-center text-cream"
+            linkStyles="text-sm font-medium capitalize"
           />
-          <ScrollLink
-            to={reservation.id}
-            smooth
-            href={`#${reservation.id}`}
-            offset={reservation.offset}
-            className="hidden sm:inline-flex"
-          >
-            <Button variant="gold" size="sm">
-              {reservation.label}
-            </Button>
-          </ScrollLink>
           <NavMobile
             containerStyles="xl:hidden"
             iconStyles="text-3xl"

@@ -17,7 +17,7 @@ export default function About() {
 
   return (
     <section
-      className="grid grid-cols-1 xl:grid-cols-2 gap-x-[74px] p-8 md:p-12 xl:p-0 items-center"
+      className="grid grid-cols-1 xl:grid-cols-2 gap-x-[74px] p-8 md:p-12 xl:py-24 xl:px-0 items-center"
       id="about"
     >
       <motion.div
@@ -33,8 +33,8 @@ export default function About() {
             {paragraph}
           </p>
         ))}
-        <p className="mb-8 font-medium text-charcoal">{about.highlight}</p>
-        <p className="mb-10 text-gold-deep font-semibold">★ {brand.halal}</p>
+        <p className="mb-8 font-medium text-cream">{about.highlight}</p>
+        <p className="mb-10 text-gold font-semibold">★ {brand.halal}</p>
         <ScrollLink
           to={about.cta.target}
           smooth

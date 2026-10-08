@@ -1,8 +1,9 @@
 "use client";
 
 /**
- * Hero – Full-bleed brand banner with eyebrow, title, tagline, cities, and two scroll CTAs.
- * Framer Motion: staggered fadeIn from lib/variants; copy and imagery from content/site.
+ * Hero – Full-bleed brand banner, RestoOne-style: full-viewport centered copy, dark
+ * vertical gradient for contrast, gold-highlighted brand name, and a pulsing scroll
+ * indicator. Framer Motion: staggered fadeIn from lib/variants; copy/imagery from content/site.
  */
 import { fadeIn } from "@/lib/variants";
 import { motion } from "framer-motion";
@@ -15,13 +16,18 @@ import ScrollLink from "./ui/scroll-link";
 export default function Hero() {
   const { hero } = site;
 
+  /** Reference-style title: every word cream except the brand's last word in gold. */
+  const titleWords = hero.title.split(" ");
+  const lastWord = titleWords.pop() ?? hero.title;
+  const titleStart = titleWords.join(" ");
+
   return (
     <section
-      className="relative min-h-[640px] xl:h-[1098px] flex items-center"
+      className="relative min-h-screen flex items-center justify-center"
       id="home"
     >
-      {/* Full-bleed brand photo; cinematic left-to-right gradient keeps the dish visible
-          while guaranteeing text contrast over the copy column */}
+      {/* Full-bleed brand photo; vertical dark gradient guarantees contrast for the
+          centered copy column, matching the reference's overlay treatment */}
       <Image
         src={hero.image}
         alt={hero.imageAlt}
@@ -30,16 +36,16 @@ export default function Hero() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/60 to-charcoal/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/60 to-charcoal/80" />
 
-      <div className="container mx-auto relative z-10 py-32 xl:py-0">
-        <div className="max-w-[640px] text-center xl:text-left">
+      <div className="container mx-auto relative z-10 py-32">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.p
             variants={fadeIn("down", 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.4 }}
-            className="text-gold uppercase tracking-[0.2em] font-semibold mb-4 flex items-center justify-center xl:justify-start gap-3"
+            className="text-gold uppercase tracking-[0.2em] font-semibold mb-4 flex items-center justify-center gap-3"
           >
             <span className="inline-block h-px w-8 bg-gold" aria-hidden="true" />
             {hero.eyebrow}
@@ -49,16 +55,17 @@ export default function Hero() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.4 }}
-            className="text-white mb-4"
+            className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6"
           >
-            {hero.title}
+            {titleStart && <>{titleStart} </>}
+            <span className="text-gold">{lastWord}</span>
           </motion.h1>
           <motion.p
             variants={fadeIn("down", 0.6)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.4 }}
-            className="text-white text-2xl font-serif italic mb-4"
+            className="text-white text-lg sm:text-xl md:text-2xl font-serif italic mb-4"
           >
             {hero.tagline}
           </motion.p>
@@ -76,7 +83,7 @@ export default function Hero() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center xl:justify-start"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             {/* href makes these real anchors: keyboard-focusable, Cmd/Ctrl-clickable */}
             <ScrollLink
@@ -97,7 +104,7 @@ export default function Hero() {
             >
               <Button
                 variant="input"
-                className="w-full sm:w-auto border-white/40 hover:bg-white/10"
+                className="w-full sm:w-auto border-white text-cream hover:bg-white hover:text-charcoal"
               >
                 {hero.ctaSecondary.label}
               </Button>
@@ -105,6 +112,20 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator (reference-style mouse); pulse disabled for reduced motion */}
+      <motion.div
+        variants={fadeIn("up", 1.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.4 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        aria-hidden="true"
+      >
+        <div className="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse motion-reduce:animate-none" />
+        </div>
+      </motion.div>
     </section>
   );
 }
