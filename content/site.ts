@@ -30,7 +30,7 @@ export const site = {
     eyebrow: "Premium Steakhouse — Sejak 2021",
     title: "Steak Kenangan",
     tagline: "Rasa Yang Bercerita",
-    cities: "Belitung • Depok Tanah Baru • Cibitung Bekasi • Jogjakarta",
+    cities: "Belitung • Depok Tanah Baru • Cibitung Bekasi • Depok Kukusan",
     image: "/hero/banner.jpg",
     imageAlt: "Suasana Steak Kenangan",
     ctaPrimary: { label: "Lihat Menu", target: "menu" },
@@ -53,7 +53,7 @@ export const site = {
     ],
     highlight:
       "Hari ini, Steak Kenangan bukan sekadar steak di atas piring — melainkan cerita di setiap meja, tawa yang dibagi, dan kenangan yang terus hidup. Karena makanan terbaik adalah yang mengingatkan kita untuk pulang.",
-    image: "/about/tentang-kami.jpg",
+    image: "/about/chiken_katsu.jpg",
     imageAlt: "Suasana Steak Kenangan",
     cta: { label: "Lihat Perjalanan Kami", target: "perjalanan" },
   },
@@ -76,16 +76,18 @@ export const site = {
         title: "Membuka Cabang di Cibitung, Bekasi",
         text: "Cabang Cibitung menjadi pusat pertumbuhan pelanggan di area Bekasi dan sekitarnya, memperluas jangkauan di Jabodetabek.",
       },
-      {
-        year: "2024",
-        title: "Hadir di Jogjakarta",
-        text: "Desember 2024, ekspansi ke Kota Destinasi Pariwisata Nasional Jogjakarta — membawa cita rasa rumahan ke tengah kota budaya.",
-      },
+
       {
         year: "2025",
         title: "Reopening Depok Tanah Baru",
         text: "Cabang Depok Tanah Baru resmi dibuka kembali sebagai bentuk komitmen menghadirkan pengalaman kuliner yang lebih dekat dengan pelanggan setia.",
       },
+      {
+        year: "2026",
+        title: "Ekspansi memperkuat - Depok, Kukusan",
+        text: "Cabang Depok Kukusan resmi dibuka sebagai pemenuh kebutuhan para mahasiswa dalam memberikan pengalaman terbaik dalam mencicipi hidangan steak dengan kualitas terbaik",
+      },
+
     ],
   },
 

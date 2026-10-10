@@ -2,6 +2,9 @@
  * Home Page (route: /) – Single-page layout. Section order comes from the registry
  * (data/sections); this map must cover every SectionId, so adding a section without
  * a component is a type error. No API calls; all content is static via content/site.
+ * Main stays fluid (no max-width) so full-bleed surfaces — hero photo, section
+ * backgrounds, footer — span the viewport edge to edge; content width is the
+ * `container` seam in tailwind.config.js, not a cap here.
  */
 import type { ComponentType } from "react";
 import About from "@/components/About";
@@ -31,7 +34,7 @@ const sectionComponents: Record<SectionId, ComponentType> = {
 
 export default function Home() {
   return (
-    <main className="w-full max-w-[1440px] bg-charcoal mx-auto overflow-hidden">
+    <main className="w-full bg-charcoal overflow-hidden">
       <Header />
       {sections.map((section) => {
         const SectionComponent = sectionComponents[section.id];

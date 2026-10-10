@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="flex flex-col justify-between xl:flex-row">
           <div className="w-[300px] mb-8 xl:mb-0">
             <Image
-              src={brand.logoWhite}
+              src={brand.logoDark}
               width={160}
               height={50}
               alt={brand.name}
