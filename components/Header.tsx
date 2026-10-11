@@ -54,12 +54,23 @@ export default function Header() {
               priority
             />
           </ScrollLink>
-          {/* Desktop nav: hidden on small screens, visible from xl. Cream links over
-              the dark hero/charcoal page; gold hover + active handled in globals/Nav. */}
-          <Nav
-            containerStyles="hidden xl:flex items-center text-cream"
-            linkStyles="text-sm font-medium capitalize"
-          />
+          {/* Desktop nav + halal badge grouped at the right edge. The badge is a
+              trust mark, not a link: sized between the nav text and brand logo,
+              and hidden below xl so the hamburger row stays logo + menu only. */}
+          <div className="flex items-center gap-4">
+            <Nav
+              containerStyles="hidden xl:flex items-center text-cream"
+              linkStyles="text-sm font-medium capitalize"
+            />
+            <Image
+              src={site.brand.halalLogo}
+              width={286}
+              height={512}
+              alt={site.brand.halal}
+              className="hidden xl:block h-28 w-auto"
+              priority
+            />
+          </div>
           <NavMobile
             containerStyles="xl:hidden"
             iconStyles="text-3xl"

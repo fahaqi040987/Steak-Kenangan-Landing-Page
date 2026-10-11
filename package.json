@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:css": "tailwindcss -c tailwind.config.js -i app/globals.css -o /dev/null"
+    "test:css": "tailwindcss -c tailwind.config.js -i app/globals.css -o /dev/null",
+    "smoke": "node scripts/smoke-home.mjs"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.8",

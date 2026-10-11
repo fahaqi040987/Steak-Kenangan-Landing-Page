@@ -24,6 +24,7 @@ export const site = {
     halal: "Bersertifikat Halal Indonesia",
     logoWhite: "/brand/logo-white.png",
     logoDark: "/brand/logo-dark.png",
+    halalLogo: "/brand/halal-logo.png",
   },
 
   hero: {
