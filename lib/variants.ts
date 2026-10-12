@@ -1,6 +1,8 @@
 /**
- * Framer Motion animation variants used site-wide (Hero, Menu, About, Footer, Map, Reservation).
+ * Framer Motion fade-in variants used site-wide (Hero, Menu, About, Footer, Map, Reservation).
  * hidden = starting state (offset by direction, opacity 0); show = final state (opacity 1, no offset).
+ * Short travel (24px) and sub-second duration read modern; combined with MotionConfig
+ * reducedMotion="user" in app/layout.tsx, prefers-reduced-motion users get fades only.
  */
 import type { Variants } from "framer-motion";
 import type { FadeDirection } from "@/types";
@@ -13,14 +15,14 @@ import type { FadeDirection } from "@/types";
 export function fadeIn(direction: FadeDirection, delay: number): Variants {
   return {
     hidden: {
-      y: direction === "up" ? 80 : direction === "down" ? -80 : 0,
+      y: direction === "up" ? 24 : direction === "down" ? -24 : 0,
       opacity: 0,
-      x: direction === "left" ? 80 : direction === "right" ? -80 : 0,
+      x: direction === "left" ? 24 : direction === "right" ? -24 : 0,
       transition: {
         type: "tween",
-        duration: 1.5,
+        duration: 0.5,
         delay,
-        ease: [0.25, 0.6, 0.3, 0.8],
+        ease: "easeOut",
       },
     },
     show: {
@@ -29,9 +31,9 @@ export function fadeIn(direction: FadeDirection, delay: number): Variants {
       opacity: 1,
       transition: {
         type: "tween",
-        duration: 1.4,
+        duration: 0.7,
         delay,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        ease: "easeOut",
       },
     },
   };

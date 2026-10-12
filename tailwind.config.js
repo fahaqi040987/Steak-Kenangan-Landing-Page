@@ -1,14 +1,20 @@
 import tailwindcssAnimate from "tailwindcss-animate";
 
-/** Tailwind config: content paths, theme (colors, fonts, backgrounds, shadows), tailwindcss-animate for Radix open/close. */
+/**
+ * Tailwind config — the token seam. The whole identity (palette, fonts, shadow)
+ * is defined here once; components reference semantic tokens only.
+ * Palette from the brand's own :root (Steak-Kenangan-Paket-Lengkap-Website/07-Website/css/style.css):
+ * Charcoal #18120C · Cream #F7F1E6 · Gold #C0923E · Gold Light #DEB86E · Maroon #8C2F2A
+ */
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   darkMode: ["class"],
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./lib/**/*.{js,ts,jsx,tsx}",
     "./data/**/*.{js,ts,jsx,tsx}",
+    "./content/**/*.{js,ts,jsx,tsx}",
     "./types/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -23,31 +29,28 @@ export default {
       xl: "1200px",
     },
     colors: {
-      body: "#e5e5e5",
+      body: "#F7F1E6",
       white: "#fff",
-      green: { DEFAULT: "#539592", hover: "#40807d" },
-      black: { DEFAULT: "#273029", heavy: "#1b211c" },
-      grey: "#888888",
-      orange: {
-        DEFAULT: "#f2994a",
-        hover: "#da863c",
+      charcoal: { DEFAULT: "#18120C", soft: "#241B12" },
+      cream: { DEFAULT: "#F7F1E6", soft: "#EFE7D7" },
+      gold: {
+        DEFAULT: "#C0923E",
+        hover: "#DEB86E",
+        light: "#E6D2A3",
+        // Antique gold for TEXT on light surfaces — #C0923E fails WCAG AA there (≈2.7:1), deep passes (≈4.6:1)
+        deep: "#8C6D2F",
       },
-      outline: "#f1f1f1",
-      pink: "#ffa5a5",
+      maroon: "#8C2F2A",
+      grey: "#60564A",
+      line: "#E0D6C4",
     },
     extend: {
       fontFamily: {
-        lora: ["var(--font-lora)", "Lora", "serif"],
-        poppins: ["var(--font-poppins)", "Poppins", "sans-serif"],
-      },
-      backgroundImage: {
-        hero: "url(/hero/bg.png)",
-        menu: "url(/menu/bg.png)",
-        reservation: "url(/reservation/bg.png)",
-        footer: "url(/footer/bg.png)",
+        serif: ["var(--font-playfair)", "Playfair Display", "Georgia", "serif"],
+        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        primary: "40px 4px 40px 0px rgba(68, 68, 68, 0.25)",
+        primary: "0 12px 32px 0 rgba(24, 18, 12, 0.16)",
       },
       keyframes: {
         "accordion-down": {
@@ -67,3 +70,5 @@ export default {
   },
   plugins: [tailwindcssAnimate],
 };
+
+export default config;
