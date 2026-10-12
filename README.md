@@ -48,7 +48,7 @@ A modern, responsive steakhouse website for **Steak Kenangan** ("Rasa Yang Berce
 - **Menu Andalan** – Grid of signature dishes with photography and IDR prices. Data comes from the content module (`content/site.ts`); hover effects and responsive columns.
 - **Reservation section** – Form with first/last name, date picker (react-day-picker), time, and party size select (Radix Select). The form hands a `ReservationRequest` to a **reservation channel** (`lib/reservation.ts`); the WhatsApp adapter opens a `wa.me` deep link — no backend required, and an HTTP backend can be swapped in behind the same interface.
 - **Testimoni** – Customer testimonials grid with 5-star ratings.
-- **Contact section** – Cabang list (Belitung, Depok Tanah Baru, Cibitung Bekasi, Jogjakarta), contact info, and an interactive Leaflet map that pins the geocodable cabang from the content module. The map is loaded only on the client via `MapDynamic` to avoid SSR issues with Leaflet.
+- **Contact section** – Three symmetric info groups under the "Kunjungi Kami" heading — Cabang Kami, Hubungi Kami, Media Sosial — each rendered with the same item anatomy from the content module (`groupTitles`, `cabang`, `reach`, `sosial`), plus the map view: a lazy-loading Google Maps embed for the Steak Kenangan Depok listing (`kontak.mapEmbed` in `content/site.ts`) — no JS map library required (see `docs/adr/0001`).
 - **Header** – Fixed nav with logo, desktop nav links (smooth scroll via react-scroll), "Reservasi" CTA, and mobile menu.
 - **Footer** – Logo, tagline, kontak links, sosial media, and cabang list.
 
@@ -56,8 +56,8 @@ A modern, responsive steakhouse website for **Steak Kenangan** ("Rasa Yang Berce
 
 - **Single route, registry-driven composition** – The only route is `/`. `app/page.tsx` renders sections in the order defined by the section registry (`data/sections.tsx`); a `Record<SectionId, ComponentType>` map makes a missing section component a type error. Navigation smooth-scrolls to section ids (`#home`, `#about`, `#perjalanan`, `#menu`, `#testimoni`, `#contact`).
 - **Content module** – All brand copy and asset paths come from `content/site.ts`; components never hardcode copy.
-- **Client components** – Interactive pieces use `"use client"` (Header, Hero, Menu, About, Timeline, Values, Testimonials, Contact, Reservation, ReservationForm, Footer, Map, Nav, NavMobile, UI primitives).
-- **Dynamic import** – The map is wrapped in `MapDynamic`, which uses `next/dynamic` with `ssr: false` so Leaflet runs only in the browser.
+- **Client components** – Interactive pieces use `"use client"` (Header, Hero, Menu, About, Timeline, Values, Testimonials, Contact, Reservation, ReservationForm, Footer, Nav, NavMobile, UI primitives).
+- **Embed map** – The Kontak map view is a Google Maps place `<iframe>` (`loading="lazy"`) driven from `kontak.mapEmbed` in the content module; no client-only dynamic import is needed (see `docs/adr/0001`).
 - **Token seam** – The whole visual identity (palette, fonts, shadows) is defined once in `tailwind.config.js`; components reference semantic tokens only (`bg-cream`, `text-charcoal`, `text-gold`, `font-serif`), so rebranding is a single edit point.
 - **SEO** – Metadata (title, description, keywords, Open Graph, Twitter, icons) is set in `app/layout.tsx` with Indonesian locale (`id_ID`) and metadataBase `https://steakkenangan.com`.
 
@@ -73,10 +73,10 @@ A modern, responsive steakhouse website for **Steak Kenangan** ("Rasa Yang Berce
 | Styling       | TailwindCSS 3.4, tailwindcss-animate                                                     |
 | Fonts         | Next.js Google Fonts (Playfair Display, Inter)                                           |
 | Animation     | Framer Motion 11                                                                         |
-| Maps          | Leaflet (plain, StrictMode-safe)                                                         |
+| Maps          | Google Maps embed (lazy-loaded iframe)                                                   |
 | UI primitives | Radix UI (Label, Popover, Select, Slot)                                                  |
 | Icons         | Lucide React, React Icons                                                                |
-| Utilities     | clsx, tailwind-merge, class-variance-authority, date-fns, react-scroll, react-responsive |
+| Utilities     | clsx, tailwind-merge, class-variance-authority, date-fns, react-scroll                   |
 
 ---
 
@@ -100,9 +100,7 @@ Steak-Kenangan-Landing-Page/
 │   ├── Reservation.tsx # Reservation section wrapper
 │   ├── ReservationForm.tsx # Form → reservation channel (WhatsApp today)
 │   ├── Testimonials.tsx# Testimoni grid with ratings
-│   ├── Contact.tsx     # Kontak: cabang list, contact info, map
-│   ├── Map.tsx         # Leaflet map, pins cabang with coords (client-only)
-│   ├── MapDynamic.tsx  # Dynamic wrapper for Map (ssr: false)
+│   ├── Contact.tsx     # Kontak: cabang list, contact info, Google Maps embed
 │   ├── Footer.tsx      # Footer with tagline, links, cabang
 │   ├── Nav.tsx         # Desktop nav (registry-driven scroll links)
 │   ├── NavMobile.tsx   # Mobile menu with icons
@@ -239,8 +237,8 @@ Reservation is a dark card wrapper with motion. The form uses Radix Popover + re
 **About**  
 Two-column layout (brand story + photo) with motion variants; CTA scrolls to Perjalanan.
 
-**Map & MapDynamic**  
-`Map` uses plain Leaflet (StrictMode-safe init/cleanup — see the module comment for why not react-leaflet) and plots only the cabang entries that carry `coords` in the content module; it is only loaded on the client. `MapDynamic` uses `dynamic(() => import('@/components/Map'), { ssr: false })` so the map does not run during SSR.
+**Contact map view**  
+The Kontak section renders `kontak.mapEmbed` from the content module as a lazy-loading, responsive Google Maps place embed ("Steak Kenangan Depok") inside the rounded map container — no map library and no client-only import (decision in `docs/adr/0001`).
 
 **Footer**  
 Footer with logo, tagline, kontak links, sosial media, and cabang list — all from the content module.
@@ -267,7 +265,7 @@ Turns form fields into a `ReservationRequest` and hands it to a `ReservationChan
 
 **Radix UI** – Accessible primitives (Label, Popover, Select, Slot). Used in ReservationForm and in `components/ui/` for consistent, accessible form and overlay behaviour.
 
-**Leaflet** – Map library used directly (no React bindings). Pins the geocodable cabang from the content module and is rendered only on the client to avoid “window is not defined” during SSR.
+**Google Maps embed** – The map view is a plain Google Maps place `<iframe>` (lazy-loaded, `referrerPolicy: strict-origin-when-cross-origin`). Its `src` and accessible `title` come from `kontak.mapEmbed` in the content module, so switching the pinned location is a content-module edit.
 
 **date-fns & react-day-picker** – Date formatting and calendar UI for the reservation date field.
 
@@ -311,7 +309,7 @@ Copy `components/ui/button.tsx` and `lib/utils.ts`. Install `class-variance-auth
 
 ## Keywords
 
-restaurant, steakhouse, Steak Kenangan, iga bakar, dining, restaurant website, food menu, book table, restaurant reservation, rasa yang bercerita, modern restaurant, fine dining, gourmet food, restaurant menu, online reservation, restaurant booking, Next.js, React, TypeScript, TailwindCSS, Framer Motion, Leaflet, Radix UI, App Router, static site, frontend, learning project, open source.
+restaurant, steakhouse, Steak Kenangan, iga bakar, dining, restaurant website, food menu, book table, restaurant reservation, rasa yang bercerita, modern restaurant, fine dining, gourmet food, restaurant menu, online reservation, restaurant booking, Next.js, React, TypeScript, TailwindCSS, Framer Motion, Google Maps Embed, Radix UI, App Router, static site, frontend, learning project, open source.
 
 ---
 

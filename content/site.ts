@@ -179,9 +179,9 @@ export const site = {
       },
       {
         quote:
-          "Perfect place for business dinners. The ambiance is sophisticated, the service is impeccable, and the steaks are consistently excellent.",
-        name: "Sarah Chen",
-        role: "Business Executive",
+          "Tempatnya enak untuk nongkrong bareng temen , lalu makanannya enak - enak , yang paling oke harganya murah meriang kalangan merakyat pokoknya",
+        name: "Ayu Apriani",
+        role: "Ibu Rumah Tangga",
       },
       {
         quote:
@@ -201,15 +201,32 @@ export const site = {
         name: "Dewi Anggraini",
         role: "Chef",
       },
+      {
+        quote:
+          "Ga ada kata-kata lagi untuk steak kenangan ini, pokoknya wajib di coba, bisa-bisa saya betah seharian disini",
+        name: "Abdullah",
+        role: "Anak Nongkrong",
+      },
     ],
   },
 
   kontak: {
     title: "Mari Berkumpul di Meja Kami",
+    /** Column headings for the Kontak section's three info groups. */
+    groupTitles: {
+      cabang: "Cabang Kami",
+      hubungi: "Hubungi Kami",
+      sosial: "Media Sosial",
+    },
+    /** Google Maps place embed rendered as the Kontak section's map view. */
+    mapEmbed: {
+      src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15860.563328939148!2d106.7981092061134!3d-6.375814115334837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ef311478eb9d%3A0xb6775626fd00a6a0!2sSteak%20Kenangan%20Depok!5e0!3m2!1sen!2sid!4v1791842832841!5m2!1sen!2sid",
+      title: "Peta lokasi Steak Kenangan Depok",
+    },
     cabang: [
-      // coords are map pins, not street addresses: Belitung is pinned at city level
-      // (Tanjung Pandan), Depok at street level (Jl. Tanah Baru). Cibitung and
-      // Jogjakarta get coords when their full addresses land — list-only until then.
+      // coords are reference locations, not street addresses: Belitung at city
+      // level (Tanjung Pandan), Depok at street level (Jl. Tanah Baru). Kept for
+      // future uses (e.g. directions links) — the map view is the embed above.
       {
         name: "Belitung",
         detail: "Cabang pertama — sejak 2021",

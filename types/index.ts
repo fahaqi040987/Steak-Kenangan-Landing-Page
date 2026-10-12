@@ -20,8 +20,8 @@ export interface MenuItem {
 
 /**
  * A Cabang (branch). detail is the human-readable line shown in the Kontak list;
- * coords are optional — the map plots only geocodable cabang, so a branch can be
- * listed before its address (and pin) lands.
+ * coords are optional reference data (kept for future uses like directions links) —
+ * the Kontak map view itself is the Google Maps embed (kontak.mapEmbed).
  */
 export interface CabangEntry {
   name: string;

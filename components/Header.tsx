@@ -2,10 +2,12 @@
 
 /**
  * Header – Fixed top bar with logo, desktop nav, and mobile menu.
- * Transparent over the hero at rest; fully opaque charcoal with a shadow after 50px of
- * scroll or on hover, so the nav always sits on a readable surface. Opaque on purpose:
- * translucent bg + backdrop-blur rendered a light fringe along the bar's bottom edge
- * (the "white line" artifact). Logo anchors left; nav sits at the right edge.
+ * Transparent over the hero at rest; frosted charcoal glass after 50px of scroll or on
+ * hover (charcoal at 50% + backdrop-blur), so scrolled content stays visible through the
+ * bar while nav text keeps a readable surface. The tint is dark charcoal, not white —
+ * a light translucent tint over the blur is what caused the earlier "white line" fringe
+ * along the bottom edge. Blur is in the transition list so it eases in with the color.
+ * Logo anchors left; nav sits at the right edge.
  */
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -15,7 +17,7 @@ import NavMobile from "./NavMobile";
 import ScrollLink from "./ui/scroll-link";
 
 export default function Header() {
-  /** When true, header shows opaque charcoal background (scrolled past 50px). */
+  /** When true, header shows frosted charcoal glass (scrolled past 50px). */
   const [active, setActive] = useState(false);
 
   /** Subscribe to scroll; set active when scrollY > 50. Cleanup removes listener. */
@@ -31,9 +33,9 @@ export default function Header() {
     <header
       className={`${
         active
-          ? "bg-charcoal shadow-lg py-3"
+          ? "bg-charcoal/50 backdrop-blur-md shadow-lg py-3"
           : "bg-transparent py-5"
-      } hover:bg-charcoal hover:shadow-lg hover:py-3 fixed top-0 w-full z-50 left-0 right-0 transition-[background-color,padding,box-shadow] duration-300`}
+      } hover:bg-charcoal/50 hover:shadow-lg hover:py-3 fixed top-0 w-full z-50 left-0 right-0 transition-[background-color,padding,box-shadow,backdrop-filter] duration-300`}
     >
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
