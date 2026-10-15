@@ -32,7 +32,7 @@ export const site = {
     title: "Steak Kenangan",
     tagline: "Rasa Yang Bercerita",
     cities: "Belitung • Depok Tanah Baru • Cibitung Bekasi • Depok Kukusan",
-    image: "/hero/banner.jpg",
+    image: "/hero/logo_restaurant_depok.png",
     imageAlt: "Suasana Steak Kenangan",
     ctaPrimary: { label: "Lihat Menu", target: "menu" },
     ctaSecondary: { label: "Reservasi Meja", target: "reservation" },

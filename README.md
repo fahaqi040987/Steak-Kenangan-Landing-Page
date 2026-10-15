@@ -160,8 +160,8 @@ Steak-Kenangan-Landing-Page/
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 4. Other scripts:
-   - **Build:** `npm run build` – production build.
-   - **Start:** `npm run start` – run the production build locally.
+   - **Build:** `npm run build` – production build; with `output: "export"` in `next.config.mjs` it emits a static `out/` directory.
+   - **Start:** `npm run start` – serve the exported static build (`out/`) at [http://localhost:3000](http://localhost:3000). Run `npm run build` first; `next start` does not work with `output: "export"`.
    - **Lint:** `npm run lint` – run ESLint (Next.js config).
 
 You do **not** need a backend or any external service to run or build this project.
@@ -303,7 +303,7 @@ Copy `components/ui/button.tsx` and `lib/utils.ts`. Install `class-variance-auth
 3. Leave build command as `npm run build` and output as default (Next.js).
 4. Deploy. The live URL will be something like `https://<project>.vercel.app`. The project is already configured with `vercel.json` for SPA-style rewrites.
 
-**Other platforms:** Use `npm run build` and `npm run start`, or follow your host’s guide for Next.js. Ensure Node.js 18+ is available. No environment variables are required for the current feature set.
+**Other platforms:** `npm run build` emits a static `out/` directory — deploy it to any static host (e.g. Cloudflare Pages: `npx wrangler pages deploy out`). Ensure Node.js 18+ is available. No environment variables are required for the current feature set.
 
 ---
 

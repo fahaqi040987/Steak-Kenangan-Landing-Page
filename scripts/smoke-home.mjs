@@ -1,7 +1,7 @@
 /**
  * Smoke test for the home page. Requires a server on :3000 — either the dev
- * server (npm run dev) or a static server for the exported build
- * (npx serve out) — then:  npm run smoke
+ * server (npm run dev) or the static preview server (npm start) — then:
+ * npm run smoke
  *
  * Asserts the page renders (200), contains brand copy, serves the wired image
  * assets, and that no Next.js error leaked into the response.
@@ -27,7 +27,7 @@ async function main() {
     try {
       res = await fetch(BASE_URL, { redirect: "manual" });
       break;
-    } catch (err) {
+    } catch {
       if (attempt === 10) {
         console.error(`SMOKE FAIL: cannot reach ${BASE_URL} — is the server running?`);
         process.exit(1);

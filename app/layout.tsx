@@ -53,12 +53,6 @@ export const metadata: Metadata = {
     "TailwindCSS",
     "Framer Motion",
   ],
-  authors: [
-    {
-      name: "Arnob Mahmud",
-      url: "https://www.arnobmahmud.com",
-    },
-  ],
   other: {
     "application-name": "Steak Kenangan",
     "apple-mobile-web-app-title": "Steak Kenangan",
@@ -69,7 +63,7 @@ export const metadata: Metadata = {
     // mirrors `charcoal` in tailwind.config.js, the token seam.
     "theme-color": "#18120C",
   },
-  creator: "Arnob Mahmud",
+  creator: "Fahaqi",
   publisher: "Steak Kenangan",
   robots: {
     index: true,

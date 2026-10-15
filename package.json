@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/serve-static.mjs",
     "lint": "next lint",
     "test:css": "tailwindcss -c tailwind.config.js -i app/globals.css -o /dev/null",
     "smoke": "node scripts/smoke-home.mjs"

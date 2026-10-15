@@ -49,10 +49,10 @@ export default function Header() {
           >
             <Image
               src={site.brand.logoDark}
-              width={160}
-              height={50}
+              width={260}
+              height={200}
               alt={site.brand.name}
-              className="h-22 w-auto"
+              className="h-22 w-22"
               priority
             />
           </ScrollLink>
