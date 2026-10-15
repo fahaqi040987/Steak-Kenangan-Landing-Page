@@ -1,17 +1,18 @@
 /**
- * Smoke test for the home page. Requires the dev server (or a preview server)
- * to be running:  npm run dev   then   npm run smoke
+ * Smoke test for the home page. Requires a server on :3000 — either the dev
+ * server (npm run dev) or a static server for the exported build
+ * (npx serve out) — then:  npm run smoke
  *
  * Asserts the page renders (200), contains brand copy, serves the wired image
- * assets, and that no Next.js image-src error leaked into the response.
+ * assets, and that no Next.js error leaked into the response.
  * Exit code 0 = green, 1 = red.
  */
 const BASE_URL = process.env.SMOKE_BASE_URL ?? "http://localhost:3000";
 
 const EXPECTED_PRESENT = [
   "Rasa Yang Bercerita", // brand tagline renders
-  "url=%2Fbrand%2Flogo-dark.png", // header brand logo wired
-  "url=%2Fbrand%2Fhalal-logo.png", // halal badge wired
+  "/brand/logo-dark.png", // header brand logo wired (direct src — images are unoptimized under static export)
+  "/brand/halal-logo.png", // halal badge wired
 ];
 
 const EXPECTED_ABSENT = [
