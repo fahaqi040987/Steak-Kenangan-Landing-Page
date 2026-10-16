@@ -5,6 +5,6 @@
 # settings — not used here because a static Pages site has no server code
 # to log or trace. They become relevant only if this project later runs a
 # Worker (e.g. @opennextjs/cloudflare) or Pages Functions.
-name = "steak-kenangan"
+name = 'steak-kenangan-landing-page'
 compatibility_date = "2025-01-01"
 pages_build_output_dir = "out"
