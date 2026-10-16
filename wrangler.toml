@@ -1,10 +1,16 @@
-# Cloudflare Pages configuration — deploys the static export (out/) from
-# `npm run build`. Deploy with: npx wrangler pages deploy
+# Cloudflare Workers static-assets configuration.
 #
-# Note: [observability.logs] / [observability.traces] are Workers-runtime
-# settings — not used here because a static Pages site has no server code
-# to log or trace. They become relevant only if this project later runs a
-# Worker (e.g. @opennextjs/cloudflare) or Pages Functions.
+# The static export from `npm run build` is served as Worker assets — no
+# server code runs, so [observability.logs] / [observability.traces] remain
+# unnecessary (they capture Worker-script telemetry; add them only if this
+# project ever gains a Worker script, e.g. @opennextjs/cloudflare).
+#
+#   npm run deploy          production deploy (main)
+#   npm run deploy:preview  branch Preview — requires wrangler >= 4.135.0
+#                           (see developers.cloudflare.com/workers/previews/)
 name = 'steak-kenangan-landing-page'
-compatibility_date = "2025-01-01"
-pages_build_output_dir = "out"
+compatibility_date = "2026-01-01"
+
+[assets]
+directory = "./out"
+not_found_handling = "404-page" # serve out/404.html with a 404 status
