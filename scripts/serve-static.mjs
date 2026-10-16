@@ -17,7 +17,9 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "out");
 const PORT = Number(process.env.PORT ?? 3000);
-const HOST = process.env.HOST ?? "0.0.0.0";
+// No HOST default: Node then binds the wildcard dual-stack socket (:: with
+// IPv4-mapped support), so http://localhost resolves over IPv6 or IPv4.
+const HOST = process.env.HOST;
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -112,8 +114,13 @@ server.on("error", (err) => {
 });
 
 function listen(port) {
-  return new Promise((resolve) => {
-    server.listen(port, HOST, () => resolve(server.address().port));
+  return new Promise((resolve, reject) => {
+    if (HOST) {
+      server.listen(port, HOST, () => resolve(server.address().port));
+    } else {
+      server.listen(port, () => resolve(server.address().port));
+    }
+    server.once("error", reject);
   });
 }
 
@@ -152,5 +159,5 @@ if (process.argv.includes("--check")) {
     process.exit(1);
   }
   const port = await listen(PORT);
-  console.log(`Serving out/ at http://localhost:${port} (ctrl+c to stop)`);
+  console.log(`✓ Ready — serving out/ at http://localhost:${port} (ctrl+c to stop)`);
 }
