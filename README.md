@@ -303,7 +303,7 @@ Copy `components/ui/button.tsx` and `lib/utils.ts`. Install `class-variance-auth
 3. Leave build command as `npm run build` and output as default (Next.js).
 4. Deploy. The live URL will be something like `https://<project>.vercel.app`. The project is already configured with `vercel.json` for SPA-style rewrites.
 
-**Other platforms:** `npm run build` emits a static `out/` directory — deploy it to any static host (e.g. Cloudflare Pages: `npx wrangler pages deploy out`). Ensure Node.js 18+ is available. No environment variables are required for the current feature set.
+**Other platforms:** `npm run build` emits a static `out/` directory — deploy it to any static host. For Cloudflare Pages, the project is preconfigured in `wrangler.toml` (project `steak-kenangan`, output `out`): run `npx wrangler pages deploy` after `npx wrangler login`. Ensure Node.js 18+ is available. No environment variables are required for the current feature set.
 
 ---
 

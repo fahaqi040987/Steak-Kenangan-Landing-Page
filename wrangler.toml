@@ -1,0 +1,10 @@
+# Cloudflare Pages configuration — deploys the static export (out/) from
+# `npm run build`. Deploy with: npx wrangler pages deploy
+#
+# Note: [observability.logs] / [observability.traces] are Workers-runtime
+# settings — not used here because a static Pages site has no server code
+# to log or trace. They become relevant only if this project later runs a
+# Worker (e.g. @opennextjs/cloudflare) or Pages Functions.
+name = "steak-kenangan"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "out"
