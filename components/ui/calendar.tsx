@@ -51,13 +51,18 @@ function Calendar({
       className={cn("p-3", className)}
       classNames={{
         ...defaultClassNames,
+        // min-w-0 is load-bearing: buttonVariants() is called without a size,
+        // so CVA injects the default size's min-w-[170px]. tailwind-merge only
+        // strips it when a later min-w class conflicts — without one, every
+        // day/nav button renders 170px wide and overflows its 36px/28px cell,
+        // stealing clicks from neighboring days.
         nav_button: cn(
           buttonVariants({ variant: "gold" }),
-          "h-7 w-7 bg-gold text-charcoal p-0 hover:opacity-90"
+          "h-7 w-7 min-w-0 bg-gold text-charcoal p-0 hover:opacity-90"
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-9 w-9 p-0 font-normal aria-selected:opacity-100"
+          "h-9 w-9 min-w-0 p-0 font-normal aria-selected:opacity-100"
         ),
         ...classNames,
       }}

@@ -122,9 +122,6 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         aria-hidden="true"
       >
-        <div className="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse motion-reduce:animate-none" />
-        </div>
       </motion.div>
     </section>
   );
