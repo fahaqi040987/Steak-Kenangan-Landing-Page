@@ -179,7 +179,7 @@ export const site = {
       },
       {
         quote:
-          "Tempatnya enak untuk nongkrong bareng temen , lalu makanannya enak - enak , yang paling oke harganya murah meriang kalangan merakyat pokoknya",
+          "Tempatnya enak untuk nongkrong bareng temen , lalu makanannya enak - enak , yang paling oke harganya murah meriah kalangan merakyat pokoknya",
         name: "Ayu Apriani",
         role: "Ibu Rumah Tangga",
       },
@@ -231,6 +231,11 @@ export const site = {
         name: "Belitung",
         detail: "Cabang pertama — sejak 2021",
         coords: { lat: -2.7331, lng: 107.6379 },
+      },
+      {
+        name: "Cibitung",
+        detail: "Jl. Bosih Raya No.212, RT.002/RW013, Wanasari, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520",
+        coords:{lat:-6.248881386390966, lng:107.08894823811242}
       },
       {
         name: "Depok — Tanah Baru",
